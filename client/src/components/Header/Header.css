@@ -1,0 +1,19 @@
+.navbar-container {
+  height: 80px;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.navbar-container .logo {
+  color: var(--select-color);
+  font-size: 50px;
+  margin: 15px 0 0 20px;
+}
+.navbar-container .icon {
+  font-size: 25px;
+  margin-right: 10px;
+  color: #fff;
+}

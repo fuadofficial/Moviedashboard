@@ -1,0 +1,27 @@
+.sidebar-container {
+  width: 200px;
+  height: 100vh;
+  background-color: var(--background-color);
+  color: var(--initial-color);
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-container .minimize-bar {
+  margin: 10px 30px;
+  font-size: 30px;
+}
+.sidebar-container .links li {
+  margin-top: 10px;
+}
+.sidebar-container .links li a {
+  text-decoration: none;
+  color: var(--initial-color);
+  margin-left: 30px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.sidebar-container .links li a .movie {
+  margin-right: 15px;
+  font-size: 25px;
+}
