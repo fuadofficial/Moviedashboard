@@ -1,7 +1,8 @@
 .sidebar-container {
   position: absolute;
+  z-index: 1;
   width: 230px;
-  height: 100%;
+  height: 100vh;
   background-color: var(--background-color);
   color: var(--initial-color);
   display: flex;
