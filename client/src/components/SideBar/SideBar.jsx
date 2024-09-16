@@ -16,21 +16,24 @@ const SideBar = () => {
 
     return (
         <div className={`sidebar-container ${isMinimized ? 'minimized' : ""}`}>
-            <div className="minimize-bar" onClick={toggleSidebar}>
-                <CiAlignLeft />
-            </div>
-            <div className="links">
-                <ul>
-                    <li>
-                        <Link to="/"><RiDashboardLine className="movie" />{isMinimized ? "" : "Home"}</Link>
-                    </li>
-                    <li>
-                        <Link to="/movieapp"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Movie App"}</Link>
-                    </li>
-                    <li>
-                        <Link to="/genre"><BsListCheck className="movie" />{isMinimized ? "" : "Genre"}</Link>
-                    </li>
-                </ul>
+            <div className="sidebar-position">
+
+                <div className="minimize-bar" onClick={toggleSidebar}>
+                    <CiAlignLeft />
+                </div>
+                <div className="links">
+                    <ul>
+                        <li>
+                            <Link to="/"><RiDashboardLine className="movie" />{isMinimized ? "" : "Home"}</Link>
+                        </li>
+                        <li>
+                            <Link to="/movieapp"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Movie App"}</Link>
+                        </li>
+                        <li>
+                            <Link to="/genre"><BsListCheck className="movie" />{isMinimized ? "" : "Genre"}</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     )

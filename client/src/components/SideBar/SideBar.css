@@ -1,11 +1,12 @@
 .sidebar-container {
+  position: absolute;
   width: 230px;
-  height: 100vh;
+  height: 100%;
   background-color: var(--background-color);
   color: var(--initial-color);
   display: flex;
   flex-direction: column;
-  transition: width 0.3s ease-in-out; 
+  transition: width 0.3s ease-in-out;
 }
 
 .sidebar-container.minimized {
@@ -29,15 +30,25 @@
   font-size: 20px;
   display: flex;
   align-items: center;
-  white-space: nowrap; 
+  white-space: nowrap;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.2s; /* Delay of 0.2 second for the name to display */
 }
 
 .sidebar-container.minimized .links li a {
-  justify-content: center; 
+  justify-content: center;
+  opacity: 0; /* Hidden when minimized */
+  transition: none; /* No delay when sidebar is minimized */
+}
+
+.sidebar-container:not(.minimized) .links li a {
+  opacity: 1; /* Visible when not minimized */
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.2s; /* Applies 0.2 second delay when expanding */
 }
 
 .sidebar-container .links li a .movie {
   margin-right: 15px;
   font-size: 25px;
 }
-

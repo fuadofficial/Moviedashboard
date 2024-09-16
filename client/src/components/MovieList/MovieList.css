@@ -1,5 +1,84 @@
-.movielist-container{
-    background-color:var(--main-background-color);
-    height: 100vh;
-    width: 100%;
+.movielist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  margin-left: 50px;
+}
+
+.movie-card {
+  display: flex;
+  width: 400px; /* Adjusted to 400px per card */
+  height: 250px;
+  background-color: var(--movie-card);
+  color: var(--initial-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+  margin: auto;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-image {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.movie-details {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-name {
+  font-size: 1.5em;
+}
+
+.movie-description {
+  font-size: 1em;
+  margin: 10px 0;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.movie-additional {
+  margin: 10px 0;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.movie-rating {
+  font-size: 1.2em;
+  color: #f39c12; /* Star color */
+  margin: 10px 0;
+}
+
+.cart-icons {
+  margin-top: 10px;
+  margin-left: 160px;
+  font-size: 20px;
+}
+.cart-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 100%; /* 1 card per row on smaller screens */
+    height: auto; /* Adjust the height for smaller screens */
+  }
 }
