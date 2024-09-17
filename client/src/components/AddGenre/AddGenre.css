@@ -1,0 +1,90 @@
+.genre-container {
+  height: auto;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  margin: 100px 10px 50px 70px;
+  width: 90%;
+  max-width: 400px;
+  color: var(--initial-color);
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.genre-container .genre-cart .input-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-section .title p {
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.input-section .form {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-section .form input {
+  padding: 15px;
+  width: 80%;
+  margin-right: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(50, 44, 44);
+  outline-style: none;
+  color: var(--initial-color);
+  font-size: 16px;
+}
+
+.input-section .form button {
+  width: 100px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--select-color);
+  border: none;
+  color: var(--initial-color);
+}
+
+.genre-section {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.genre {
+  width: 150px;
+  border: 1px solid var(--initial-color);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.genre p {
+  text-align: center;
+  word-wrap: break-word;
+  margin: 15px;
+}
+
+.genre hr {
+  margin: 10px 0;
+}
+
+.genre .icons {
+  margin-left: 70px;
+}
+.genre .icon {
+  margin: 0 5px;
+}
+
+@media (min-width: 768px) {
+  .genre-container .genre-cart {
+    width: 90%;
+    max-width: 600px;
+  }
+}

@@ -1,3 +1,4 @@
 .home-page-container{
    background-color: var(--main-background-color);
+   padding-bottom: 30px ;
 }
