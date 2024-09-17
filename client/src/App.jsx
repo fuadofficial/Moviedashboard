@@ -4,6 +4,8 @@ import Home from './pages/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SideBar from './components/SideBar/SideBar';
+import AddMovie from './pages/AddMovie/AddMovie';
+import Genre from './pages/Genre/Genre';
 
 const App = () => {
     return (
@@ -13,6 +15,8 @@ const App = () => {
                 <SideBar />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/addmovie" element={<AddMovie />} />
+                    <Route path="/genre" element={<Genre />} />
                 </Routes>
                 <Footer />
             </Router>
