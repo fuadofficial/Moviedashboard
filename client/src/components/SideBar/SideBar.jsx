@@ -4,15 +4,11 @@ import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsListCheck } from "react-icons/bs";
 import './SideBar.css'
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import { SidebarContext } from "../../context/SidebarContext";
 
 const SideBar = () => {
-
-    const [isMinimized, setIsMinimized] = useState(false)
-
-    const toggleSidebar = () => {
-        setIsMinimized(!isMinimized)
-    }
+    const { isMinimized, toggleSidebar } = useContext(SidebarContext)
 
     return (
         <div className={`sidebar-container ${isMinimized ? 'minimized' : ""}`}>

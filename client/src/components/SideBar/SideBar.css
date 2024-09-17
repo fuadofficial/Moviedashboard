@@ -1,5 +1,6 @@
 .sidebar-container {
-  position: absolute;
+  position: fixed;
+  top: 80px;
   z-index: 1;
   width: 230px;
   height: 100vh;
