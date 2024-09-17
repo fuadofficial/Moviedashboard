@@ -28,7 +28,7 @@
 
 .movie-image {
   width: 150px;
-  height: 230px;
+  height: 249px;
   padding: 2px;
   border-radius: 8px;
   object-position: center;
@@ -56,6 +56,7 @@
 }
 
 .movie-additional {
+  border: 2px solid #fff;
   margin: 10px 0;
   color: #555;
   font-size: 0.9em;

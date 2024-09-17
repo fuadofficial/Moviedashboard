@@ -27,7 +27,10 @@ const MovieList = () => {
                     <div className='movie-details'>
                         <h3 className='movie-name'>{movie.name}</h3>
                         <p className='movie-description'>{movie.description}</p>
-                        <div className='movie-additional'>Additional Info</div>
+                        <div className='movie-additional'>
+                            <div className="movie-special">comady</div>
+                            <div className="movie-special">drama</div>
+                        </div>
                         <div className='movie-rating'>
                             {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
                         </div>
