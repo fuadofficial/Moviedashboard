@@ -1,13 +1,10 @@
-/* NewMovie.css */
-
-/* Base styles */
 .newmovie-container {
-  height: auto; /* Allow height to adjust based on content */
+  height: auto;
   background-color: var(--background-color);
   border-radius: 8px;
-  margin: 50px 10px 50px 70px; /* Center horizontally */
-  width: 90%; /* Default width for small screens */
-  max-width: 400px; /* Max width for small screens */
+  margin: 100px 10px 50px 70px;
+  width: 90%;
+  max-width: 400px;
   color: var(--initial-color);
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -19,11 +16,16 @@
   flex-direction: column;
 }
 
-.newmovie-container .upload-image input {
+.lable-setup {
+  margin-top: 10px;
+}
+
+.texts {
   margin-top: 10px;
   border: 1px solid var(--select-color);
   border-radius: 8px;
-  width: 100%; 
+  width: 100%;
+  outline-style: none;
 }
 
 .newmovie-container .upload-image input[type="file"]::file-selector-button {
@@ -36,13 +38,109 @@
   text-transform: capitalize;
 }
 
-/* Media query for larger screens */
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title input {
+  padding: 15px;
+  background-color: var(--background-color);
+  color: white;
+  font-size: 15px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.description input {
+  padding: 15px;
+  background-color: var(--background-color);
+  color: white;
+  font-size: 15px;
+  height: 70px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.rating input {
+  margin-top: 10px;
+}
+
+.rating .nubmers {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+  margin-top: 5px;
+}
+
+.tick-box-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tick-box-container .tick-box {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.tick-box-container .tick-box input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--select-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  cursor: pointer;
+  outline: none;
+  margin: 0 15px 0 5px;
+  position: relative;
+}
+
+.tick-box-container .tick-box input:checked {
+  background-color: #007bff;
+  border-color: #0056b3;
+}
+
+.tick-box-container .tick-box input:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: white;
+}
+
+.button button {
+  padding: 8px;
+  width: 100%;
+  border-radius: 9px;
+  margin-top: 15px;
+  background-color: var(--select-color);
+  border: none;
+  color: var(--initial-color);
+  font-size: 18px;
+  transition: all 400ms ease-in-out;
+}
+
+.button button:hover{
+  background-color: #3a3aba;
+}
+
 @media (min-width: 768px) {
   .newmovie-container {
-    width: 90%; /* Width for medium screens */
-    max-width: 600px; /* Max width for larger screens */
+    width: 90%;
+    max-width: 600px;
   }
-  .newmovie-container .upload-image input{
+  .texts {
     width: 90%;
   }
 }
