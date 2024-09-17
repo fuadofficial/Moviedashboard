@@ -23,7 +23,7 @@ const SideBar = () => {
                             <Link to="/"><RiDashboardLine className="movie" />{isMinimized ? "" : "Home"}</Link>
                         </li>
                         <li>
-                            <Link to="/movieapp"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Movie App"}</Link>
+                            <Link to="/addmovie"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Add Movie"}</Link>
                         </li>
                         <li>
                             <Link to="/genre"><BsListCheck className="movie" />{isMinimized ? "" : "Genre"}</Link>
