@@ -3,8 +3,7 @@
   background-color: var(--background-color);
   border-radius: 8px;
   margin: 100px 10px 50px 70px;
-  width: 90%;
-  max-width: 400px;
+  width: 60%;
   color: var(--initial-color);
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -13,6 +12,8 @@
 
 .genre-container .genre-cart .input-section {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -82,9 +83,9 @@
   margin: 0 5px;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .genre-container .genre-cart {
     width: 90%;
     max-width: 600px;
   }
-}
+} */
