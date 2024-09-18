@@ -10,7 +10,6 @@ const MovieList = () => {
         const userConfirmed = window.confirm(`Are you sure you want to delete ${name}?`);
         if (userConfirmed) {
             setMovies(prevMovies => prevMovies.filter(movie => movie.id !== id));
-            alert(`${name} has been deleted.`);
         }
     };
 

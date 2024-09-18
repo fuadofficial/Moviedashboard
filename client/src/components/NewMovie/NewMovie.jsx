@@ -23,11 +23,22 @@ const NewMovie = () => {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!title.trim()) newErrors.title = 'Please enter a title.';
-        if (!description.trim()) newErrors.description = 'Please enter a description.';
+        if (!title.trim()) {
+            newErrors.title = 'Please enter a title.';
+        } else if (title.length > 25) {
+            newErrors.title = 'Title cannot exceed 25 characters.';
+        }
+
+        if (!description.trim()) {
+            newErrors.description = 'Please enter a description.';
+        } else if (description.length > 50) {
+            newErrors.description = 'Description cannot exceed 50 characters.';
+        }
+
         if (rating <= 0) newErrors.rating = 'Please select a rating.';
         if (!image) newErrors.image = 'Please upload an image.';
         if (selectedGenres.length < 1 || selectedGenres.length > 5) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
