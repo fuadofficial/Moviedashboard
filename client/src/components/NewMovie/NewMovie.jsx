@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { useGenres } from '../../context/GenreContext';
+import { useNavigate } from 'react-router-dom';
 import './NewMovie.css';
+import { useGenres } from '../../context/GenreContext';
+import { useMovies } from '../../context/MovieContext ';
 
 const NewMovie = () => {
     const { genres } = useGenres();
+    const { addMovie } = useMovies();
+    const navigate = useNavigate(); // Hook for navigation
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [rating, setRating] = useState(0);
@@ -32,8 +36,25 @@ const NewMovie = () => {
         event.preventDefault();
         if (validateForm()) {
             setErrors({});
-            // Perform submission logic here
-            console.log({ title, description, rating, image, selectedGenres });
+            const newMovie = {
+                id: Date.now(), // Simple ID generation for demo purposes
+                name: title,
+                description,
+                special: selectedGenres,
+                image: URL.createObjectURL(image),
+                rating
+            };
+            addMovie(newMovie); // Add movie using context
+
+            // Navigate to MovieList page after successful submission
+            navigate('/');
+            
+            // Clear form
+            setTitle('');
+            setDescription('');
+            setRating(0);
+            setImage(null);
+            setSelectedGenres([]);
         }
     };
 
