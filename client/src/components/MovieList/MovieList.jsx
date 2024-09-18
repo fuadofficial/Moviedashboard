@@ -2,16 +2,22 @@ import { MdDelete } from "react-icons/md";
 import './MovieList.css';
 import { FaRegEdit } from 'react-icons/fa';
 import { useMovies } from "../../context/MovieContext ";
+import { useNavigate } from "react-router-dom";
 
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
+    const navigate = useNavigate();
 
-    const handleDelete = (id, name) => {
-        const userConfirmed = window.confirm(`Are you sure you want to delete ${name}?`);
+    const handleDelete = (movie) => {
+        const userConfirmed = window.confirm(`Are you sure you want to delete ${movie.name}?`);
         if (userConfirmed) {
-            setMovies(prevMovies => prevMovies.filter(movie => movie.id !== id));
+            setMovies(prevMovies => prevMovies.filter(movie => movie.id !== movie.id));
         }
     };
+
+    const handleEdit = (movie) => {
+        navigate('/addmovie', { state: { movie } })
+    }
 
     return (
         <div className="movielist-container">
@@ -34,8 +40,8 @@ const MovieList = () => {
                             {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
                         </div>
                         <div className="cart-icons">
-                            <FaRegEdit className=" cart-icon" />
-                            <MdDelete onClick={() => handleDelete(movie.id, movie.name)} className="cart-icon" />
+                            <FaRegEdit onClick={() => handleEdit(movie)} className=" cart-icon" />
+                            <MdDelete onClick={() => handleDelete(movie)} className="cart-icon" />
                         </div>
                     </div>
                 </div>

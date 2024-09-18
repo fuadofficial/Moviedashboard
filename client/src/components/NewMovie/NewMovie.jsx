@@ -1,18 +1,22 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
 import { useMovies } from '../../context/MovieContext ';
+import { nanoid } from 'nanoid'; // Import nanoid
 
 const NewMovie = () => {
     const { genres } = useGenres();
     const { addMovie } = useMovies();
-    const navigate = useNavigate(); // Hook for navigation
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [rating, setRating] = useState(0);
-    const [image, setImage] = useState(null);
-    const [selectedGenres, setSelectedGenres] = useState([]);
+    const navigate = useNavigate();
+    const location = useLocation(); // Get the passed movie object
+    const movieToEdit = location.state?.movie || null; // Check if there's a movie to edit
+
+    const [title, setTitle] = useState(movieToEdit ? movieToEdit.name : '');
+    const [description, setDescription] = useState(movieToEdit ? movieToEdit.description : '');
+    const [rating, setRating] = useState(movieToEdit ? movieToEdit.rating : 0);
+    const [image, setImage] = useState(movieToEdit ? movieToEdit.image : null);
+    const [selectedGenres, setSelectedGenres] = useState(movieToEdit ? movieToEdit.special : []);
     const [errors, setErrors] = useState({
         title: '',
         description: '',
@@ -46,19 +50,22 @@ const NewMovie = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            setErrors({});
-            const newMovie = {
-                id: Date.now(), // Simple ID generation for demo purposes
+            const movieData = {
+                id: movieToEdit ? movieToEdit.id : nanoid(), // Keep ID if editing, otherwise generate a new one
                 name: title,
                 description,
                 special: selectedGenres,
-                image: URL.createObjectURL(image),
+                image: image ? (typeof image === 'string' ? image : URL.createObjectURL(image)),
                 rating
             };
-            addMovie(newMovie); // Add movie using context
 
-            // Navigate to MovieList page after successful submission
-            navigate('/');
+            if (movieToEdit) {
+                updateMovie(movieData); // Update existing movie
+            } else {
+                addMovie(movieData); // Add new movie
+            }
+
+            navigate('/')
 
             // Clear form
             setTitle('');

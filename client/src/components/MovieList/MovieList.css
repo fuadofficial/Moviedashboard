@@ -79,7 +79,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .movie-card {
     flex-direction: column;
     width: 300px;
