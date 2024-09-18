@@ -9,7 +9,7 @@ const AddMovie = () => {
 
     return (
         <div className="addmovie-container" onClick={sidebarMinimize}>
-            <NewMovie />
+            <NewMovie/>
         </div>
     )
 }

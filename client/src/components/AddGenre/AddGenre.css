@@ -18,8 +18,9 @@
 }
 
 .input-section .title p {
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
+  margin-left: 10px;
 }
 
 .input-section .form {

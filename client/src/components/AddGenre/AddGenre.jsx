@@ -2,10 +2,11 @@ import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from 'react-icons/fa';
 import './AddGenre.css';
 import { useState, useRef, useEffect } from "react";
+import { useGenres } from "../../context/GenreContext";
 
 const AddGenre = () => {
     const [inputValue, setInputValue] = useState("");
-    const [genres, setGenres] = useState([]);
+    const { genres, setGenres } = useGenres()
     const [editIndex, setEditIndex] = useState(null);
     const inputRef = useRef(null);
 
