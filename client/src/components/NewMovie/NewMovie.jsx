@@ -2,7 +2,6 @@ import './NewMovie.css';
 
 const NewMovie = () => {
 
-
     return (
         <div className='newmovie-container'>
             <div className="upload-image">
@@ -34,26 +33,6 @@ const NewMovie = () => {
                 </div>
             </div>
             <div className="tick-box-container">
-                <div className="tick-box">
-                    <label>Action</label>
-                    <input type="checkbox" className='tick-box' />
-                </div>
-                <div className="tick-box">
-                    <label>Action</label>
-                    <input type="checkbox" className='tick-box' />
-                </div>
-                <div className="tick-box">
-                    <label>Action</label>
-                    <input type="checkbox" className='tick-box' />
-                </div>
-                <div className="tick-box">
-                    <label>Action</label>
-                    <input type="checkbox" className='tick-box' />
-                </div>
-                <div className="tick-box">
-                    <label>Action</label>
-                    <input type="checkbox" className='tick-box' />
-                </div>
                 <div className="tick-box">
                     <label>Action</label>
                     <input type="checkbox" className='tick-box' />
