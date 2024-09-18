@@ -4,12 +4,13 @@ import { FaRegEdit } from 'react-icons/fa';
 import { useMovies } from "../../context/MovieContext ";
 
 const MovieList = () => {
-    const { movies } = useMovies();
+    const { movies, setMovies } = useMovies();
 
     const handleDelete = (id, name) => {
         const userConfirmed = window.confirm(`Are you sure you want to delete ${name}?`);
         if (userConfirmed) {
-            // Implement delete functionality if needed
+            setMovies(prevMovies => prevMovies.filter(movie => movie.id !== id));
+            alert(`${name} has been deleted.`);
         }
     };
 
