@@ -6,6 +6,7 @@ import './SideBar.css'
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { SidebarContext } from "../../context/SidebarContext";
+import { FaWindowClose } from "react-icons/fa";
 
 const SideBar = () => {
     const { isMinimized, toggleSidebar } = useContext(SidebarContext)
@@ -15,7 +16,7 @@ const SideBar = () => {
             <div className="sidebar-position">
 
                 <div className="minimize-bar" onClick={toggleSidebar}>
-                    <CiAlignLeft />
+                    {isMinimized ? <CiAlignLeft /> : <FaWindowClose className="close-icon" />}
                 </div>
                 <div className="links">
                     <ul>

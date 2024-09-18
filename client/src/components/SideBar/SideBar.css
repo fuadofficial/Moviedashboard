@@ -21,6 +21,15 @@
   cursor: pointer;
 }
 
+.sidebar-container .minimize-bar .close-icon {
+  transform: rotate(180deg);
+  transition: transform 400ms ease-in-out;
+}
+
+.sidebar-container .minimize-bar:hover .close-icon {
+  transform: rotate(0deg);
+}
+
 .sidebar-container .links li {
   margin-top: 10px;
   position: relative;
