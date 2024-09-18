@@ -23,14 +23,14 @@
 }
 
 .upload-image-container .texts {
-  margin-right: 10px; /* Space between input and preview image */
+  margin-right: 10px;
 }
 
 .upload-image-container .image-preview {
-  width: 50px; /* Width of the preview image */
-  height: auto; /* Maintain aspect ratio */
+  width: 50px;
+  height: auto;
   border-radius: 8px;
-  border: 1px solid var(--select-color);
+  border: none;
 }
 
 .lable-setup {
@@ -46,7 +46,7 @@
 }
 
 .newmovie-container .upload-image input {
-  width: 230px;
+  width: 78%;
 }
 
 .newmovie-container .upload-image input[type="file"]::file-selector-button {

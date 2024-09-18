@@ -48,7 +48,7 @@ const NewMovie = () => {
 
             // Navigate to MovieList page after successful submission
             navigate('/');
-            
+
             // Clear form
             setTitle('');
             setDescription('');
