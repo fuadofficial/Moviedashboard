@@ -13,8 +13,8 @@ const App = () => {
                 <Header />
                 <SideBar />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/addmovie" element={<AddMovie />} />
+                    <Route path="/" element={<AddMovie />} />
+                    <Route path="/movielist" element={<Home />} />
                     <Route path="/genre" element={<Genre />} />
                 </Routes>
             </Router>

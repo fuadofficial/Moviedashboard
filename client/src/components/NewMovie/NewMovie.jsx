@@ -66,7 +66,7 @@ const NewMovie = () => {
                 addMovie(movieData); // Call addMovie if adding new
             }
 
-            navigate('/'); // Navigate to homepage after submission
+            navigate('/movielist'); // Navigate to homepage after submission
 
             // Clear form
             setTitle('');

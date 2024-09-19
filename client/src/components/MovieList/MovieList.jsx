@@ -18,36 +18,38 @@ const MovieList = () => {
 
 
     const handleEdit = (movie) => {
-        navigate('/addmovie', { state: { movie } })
+        navigate('/', { state: { movie } })
     }
 
     return (
         <div className="movielist-container">
-            {movies.map(movie => (
-                <div className='movie-card' key={movie.id}>
-                    <img src={movie.image} alt={movie.name} className='movie-image' />
-                    <div className='movie-details'>
-                        <h3 className='movie-name'>{movie.name}</h3>
-                        <p className='movie-description'>{movie.description}</p>
-                        <div>
-                            {movie.special && (
-                                <div className="movie-additional">
-                                    {movie.special.map((specialItem, index) => (
-                                        <div key={index} className="movie-special">{specialItem}</div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                        <div className='movie-rating'>
-                            {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
-                        </div>
-                        <div className="cart-icons">
-                            <FaRegEdit onClick={() => handleEdit(movie)} className=" cart-icon" />
-                            <MdDelete onClick={() => handleDelete(movie)} className="cart-icon" />
+            {movies && movies.length > 0 ? (
+                movies.map(movie => (
+                    <div className='movie-card' key={movie.id}>
+                        <img src={movie.image} alt={movie.name} className='movie-image' />
+                        <div className='movie-details'>
+                            <h3 className='movie-name'>{movie.name}</h3>
+                            <p className='movie-description'>{movie.description}</p>
+                            <div>
+                                {movie.special && (
+                                    <div className="movie-additional">
+                                        {movie.special.map((specialItem, index) => (
+                                            <div key={index} className="movie-special">{specialItem}</div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='movie-rating'>
+                                {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
+                            </div>
+                            <div className="cart-icons">
+                                <FaRegEdit onClick={() => handleEdit(movie)} className=" cart-icon" />
+                                <MdDelete onClick={() => handleDelete(movie)} className="cart-icon" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))
+            ) : <h1>Add new movie</h1>}
         </div>
     );
 };
