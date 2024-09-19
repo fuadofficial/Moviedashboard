@@ -2,7 +2,7 @@ import { MdDelete } from "react-icons/md";
 import './MovieList.css';
 import { FaRegEdit } from 'react-icons/fa';
 import { useMovies } from "../../context/MovieContext ";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
@@ -49,7 +49,18 @@ const MovieList = () => {
                         </div>
                     </div>
                 ))
-            ) : <h1>Add new movie</h1>}
+            ) :
+                <div>
+                    <h1 className="heading">Add new movie</h1>
+                    <div className="link">
+                    <ul>
+                        <li>
+                            <Link to="/">Add New Movie</Link>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            }
         </div>
     );
 };
