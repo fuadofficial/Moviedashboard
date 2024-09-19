@@ -8,12 +8,14 @@ const MovieList = () => {
     const { movies, setMovies } = useMovies();
     const navigate = useNavigate();
 
-    const handleDelete = (movie) => {
-        const userConfirmed = window.confirm(`Are you sure you want to delete ${movie.name}?`);
+    const handleDelete = (datas) => {
+        console.log(datas); // Check the data being passed
+        const userConfirmed = window.confirm(`Are you sure you want to delete ${datas.name} from the movie list?`);
         if (userConfirmed) {
-            setMovies(prevMovies => prevMovies.filter(movie => movie.id !== movie.id));
+            setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== datas.id));
         }
     };
+
 
     const handleEdit = (movie) => {
         navigate('/addmovie', { state: { movie } })

@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
+import { nanoid } from 'nanoid'; 
 import { useMovies } from '../../context/MovieContext ';
-import { nanoid } from 'nanoid'; // Import nanoid
 
 const NewMovie = () => {
     const { genres } = useGenres();
-    const { addMovie } = useMovies();
+    const { addMovie, updateMovie } = useMovies(); // Include updateMovie
     const navigate = useNavigate();
-    const location = useLocation(); // Get the passed movie object
-    const movieToEdit = location.state?.movie || null; // Check if there's a movie to edit
+    const location = useLocation();
+    const movieToEdit = location.state?.movie || null;
 
     const [title, setTitle] = useState(movieToEdit ? movieToEdit.name : '');
     const [description, setDescription] = useState(movieToEdit ? movieToEdit.description : '');
@@ -49,23 +49,24 @@ const NewMovie = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         if (validateForm()) {
             const movieData = {
-                id: movieToEdit ? movieToEdit.id : nanoid(), // Keep ID if editing, otherwise generate a new one
+                id: movieToEdit ? movieToEdit.id : nanoid(),
                 name: title,
                 description,
                 special: selectedGenres,
-                image: image ? (typeof image === 'string' ? image : URL.createObjectURL(image)),
-                rating
+                image: typeof image === 'string' ? image : URL.createObjectURL(image),
+                rating,
             };
 
             if (movieToEdit) {
-                updateMovie(movieData); // Update existing movie
+                updateMovie(movieData); // Call updateMovie if editing
             } else {
-                addMovie(movieData); // Add new movie
+                addMovie(movieData); // Call addMovie if adding new
             }
 
-            navigate('/')
+            navigate('/'); // Navigate to homepage after submission
 
             // Clear form
             setTitle('');
@@ -125,7 +126,7 @@ const NewMovie = () => {
                         {image && (
                             <img
                                 className='image-preview'
-                                src={URL.createObjectURL(image)}
+                                src={typeof image === 'string' ? image : URL.createObjectURL(image)} // Display correct image format
                                 alt='Preview'
                             />
                         )}
