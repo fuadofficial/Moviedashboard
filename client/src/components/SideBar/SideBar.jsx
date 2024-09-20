@@ -21,13 +21,13 @@ const SideBar = () => {
                 <div className="links">
                     <ul>
                         <li>
-                            <Link to="/"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Add Movie"}</Link>
+                            <Link to="/"><AiOutlineAppstoreAdd className="movie" />{isMinimized ? "" : "Home"}</Link>
                         </li>
                         <li>
-                            <Link to="/movielist"><RiDashboardLine className="movie" />{isMinimized ? "" : "Movie List"}</Link>
+                            <Link to="/addmovie"><RiDashboardLine className="movie" />{isMinimized ? "" : "Add Movie"}</Link>
                         </li>
                         <li>
-                            <Link to="/genre"><BsListCheck className="movie" />{isMinimized ? "" : "Genre"}</Link>
+                            <Link to="/genre"><BsListCheck className="movie" />{isMinimized ? "" : "Add Genre"}</Link>
                         </li>
                     </ul>
                 </div>

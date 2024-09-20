@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
-import { nanoid } from 'nanoid'; 
+import { nanoid } from 'nanoid';
 import { useMovies } from '../../context/MovieContext ';
 
 const NewMovie = () => {
@@ -61,13 +61,14 @@ const NewMovie = () => {
             };
 
             if (movieToEdit) {
-                updateMovie(movieData); // Call updateMovie if editing
+                updateMovie(movieData); // Update movie if editing
             } else {
-                addMovie(movieData); // Call addMovie if adding new
+                addMovie(movieData); // Add movie if adding new
             }
 
-            navigate('/movielist'); // Navigate to homepage after submission
-
+            // Wait for the state to update and then navigate to the movie list
+            setTimeout(() => navigate('/'), 100); // Small delay to ensure state update
+          
             // Clear form
             setTitle('');
             setDescription('');
@@ -198,7 +199,9 @@ const NewMovie = () => {
                     {errors.checkboxes && <span className="error-message">{errors.checkboxes}</span>}
                 </div>
                 <div className="button">
-                    <button type='submit'>Submit</button>
+                    <button type='submit'>
+                        {movieToEdit ? 'Update' : 'Submit'}
+                    </button>
                 </div>
             </form>
         </div>

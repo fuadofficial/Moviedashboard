@@ -18,7 +18,7 @@ const MovieList = () => {
 
 
     const handleEdit = (movie) => {
-        navigate('/', { state: { movie } })
+        navigate('/addmovie', { state: { movie } })
     }
 
     return (
@@ -50,19 +50,15 @@ const MovieList = () => {
                     </div>
                 ))
             ) :
-                <div>
+                <div className="addmovie-box">
                     <h1 className="heading">Add new movie</h1>
-                    <div className="link">
-                    <ul>
-                        <li>
-                            <Link to="/">Add New Movie</Link>
-                        </li>
-                    </ul>
-                </div>
+                    <Link to={'/addmovie'}>
+                        <button>Add new movie</button>
+                    </Link>
                 </div>
             }
         </div>
     );
 };
 
-export default MovieList;
+export default MovieList;  
