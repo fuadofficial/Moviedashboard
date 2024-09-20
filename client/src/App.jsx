@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './style/globarStyle.css'
-import Home from './pages/Home/Home';
+import Home from './pages/Home/MovieList';
 import Header from './components/Header/Header';
 import SideBar from './components/SideBar/SideBar';
 import AddMovie from './pages/AddMovie/AddMovie';

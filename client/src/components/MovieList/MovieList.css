@@ -12,6 +12,7 @@
   color: var(--initial-color);
   text-shadow: 2px 2px black;
   text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .movielist-container .link {
@@ -30,6 +31,7 @@
   background-color: var(--select-color);
   padding: 10px;
   border-radius: 8px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .movie-card {
