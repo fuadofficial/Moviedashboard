@@ -3,11 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
 import { nanoid } from 'nanoid';
-import { useMovies } from '../../context/MovieContext ';
+// import { useMovies } from '../../context/MovieContext ';
+import axios from 'axios';
+
 
 const NewMovie = () => {
     const { genres } = useGenres();
-    const { addMovie, updateMovie } = useMovies(); // Include updateMovie
+    // const { addMovie, updateMovie } = useMovies(); // Include updateMovie
     const navigate = useNavigate();
     const location = useLocation();
     const movieToEdit = location.state?.movie || null;
@@ -47,7 +49,7 @@ const NewMovie = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (validateForm()) {
@@ -60,23 +62,27 @@ const NewMovie = () => {
                 rating,
             };
 
-            if (movieToEdit) {
-                updateMovie(movieData); // Update movie if editing
-            } else {
-                addMovie(movieData); // Add movie if adding new
-            }
+            try {
+                if (movieToEdit) {
+                    // Send PUT request to update existing movie
+                    await axios.put(`http://localhost:5000/movies/${movieToEdit.id}`, movieData);
+                } else {
+                    // Send POST request to add new movie
+                    await axios.post('http://localhost:5000/movies', movieData);
+                }
 
-            // Wait for the state to update and then navigate to the movie list
-            setTimeout(() => navigate('/'), 100); // Small delay to ensure state update
-          
-            // Clear form
-            setTitle('');
-            setDescription('');
-            setRating(0);
-            setImage(null);
-            setSelectedGenres([]);
+                setTimeout(() => navigate('/'), 100); // Small delay to ensure state update
+                // Clear form after submitting
+                setTitle('');
+                setDescription('');
+                setRating(0);
+                setImage(null);
+                setSelectedGenres([]);
+            } catch (error) {
+                console.error('Error submitting movie data', error);
+            }
         }
-    };
+    }
 
     const handleChange = (setter) => (e) => {
         setter(e.target.value);
