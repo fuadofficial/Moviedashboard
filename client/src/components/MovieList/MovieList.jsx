@@ -21,7 +21,6 @@ const MovieList = () => {
         }
     };
 
-
     const handleEdit = (movie) => {
         navigate('/addmovie', { state: { movie } })
     }

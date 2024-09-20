@@ -65,10 +65,10 @@ const NewMovie = () => {
             try {
                 if (movieToEdit) {
                     // Send PUT request to update existing movie
-                    await axios.put(`http://localhost:5000/movies/${movieToEdit.id}`, movieData);
+                    await axios.put(`http://localhost:3000/${movieToEdit.id}`, movieData);
                 } else {
                     // Send POST request to add new movie
-                    await axios.post('http://localhost:5000/movies', movieData);
+                    await axios.post('http://localhost:3000', movieData);
                 }
 
                 setTimeout(() => navigate('/'), 100); // Small delay to ensure state update
