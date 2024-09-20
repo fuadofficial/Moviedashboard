@@ -49,9 +49,10 @@ const MovieList = () => {
                         </div>
                     </div>
                 ))
-            ) :
+            )
+                :
                 <div className="addmovie-box">
-                    <h1 className="heading">Add new movie</h1>
+                    <h1 className="heading">No movies available. Add a new movie to get started!</h1>
                     <Link to={'/addmovie'}>
                         <button>Add new movie</button>
                     </Link>

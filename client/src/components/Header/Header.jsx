@@ -1,7 +1,6 @@
-import { IoIosSearch } from "react-icons/io";
-import { FaBell } from "react-icons/fa";
 import { SiThemoviedatabase } from "react-icons/si";
 import './Header.css'
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -9,9 +8,10 @@ const Header = () => {
             <div className="logo">
                 <SiThemoviedatabase />
             </div>
-            <div className="icons">
-                <IoIosSearch className="icon" />
-                <FaBell className="icon" />
+            <div>
+                <Link to={'/addmovie'}>
+                    <button>Add new movie</button>
+                </Link>
             </div>
         </nav>
     )
