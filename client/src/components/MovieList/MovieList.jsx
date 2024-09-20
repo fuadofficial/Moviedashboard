@@ -3,10 +3,15 @@ import './MovieList.css';
 import { FaRegEdit } from 'react-icons/fa';
 import { useMovies } from "../../context/MovieContext ";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MovieList = () => {
-    const { movies, setMovies } = useMovies();
+    const { movies, setMovies,fetchTodo } = useMovies();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchTodo()
+    }, []);
 
     const handleDelete = (datas) => {
         console.log(datas); // Check the data being passed
