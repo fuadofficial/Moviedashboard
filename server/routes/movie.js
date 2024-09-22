@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+
+// this is sample data . the next time this data store in database
+
 let movies = [
     {
         id: 1,
