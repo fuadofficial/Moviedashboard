@@ -6,7 +6,6 @@ import { nanoid } from 'nanoid';
 // import { useMovies } from '../../context/MovieContext ';
 import axios from 'axios';
 
-
 const NewMovie = () => {
     const { genres } = useGenres();
     // const { addMovie, updateMovie } = useMovies(); // Include updateMovie
