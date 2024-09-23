@@ -1,8 +1,4 @@
 import { createContext, useState, useContext } from 'react';
-import axios from 'axios'
-
-const API_URL = "http://localhost:3000"
-// Create Context
 const MovieContext = createContext();
 
 // Create Provider Component
@@ -10,14 +6,6 @@ const MovieContext = createContext();
 export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
 
-    const fetchTodo = async () => {
-        try {
-            const response = await axios(API_URL)
-            setMovies(response.data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
     const [editingMovie, setEditingMovie] = useState(null); // State for editing movie
 
     // Add new movie
@@ -41,7 +29,7 @@ export const MovieProvider = ({ children }) => {
     };
 
     return (
-        <MovieContext.Provider value={{ movies, addMovie, updateMovie, setMovies, editingMovie, startEditing,fetchTodo }}>
+        <MovieContext.Provider value={{ movies, addMovie, updateMovie, setMovies, editingMovie, startEditing }}>
             {children}
         </MovieContext.Provider>
     );

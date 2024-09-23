@@ -6,6 +6,8 @@ import { nanoid } from 'nanoid';
 // import { useMovies } from '../../context/MovieContext ';
 import axios from 'axios';
 
+const API_URL = "http://localhost:3000"
+
 const NewMovie = () => {
     const { genres } = useGenres();
     // const { addMovie, updateMovie } = useMovies(); // Include updateMovie
@@ -64,10 +66,14 @@ const NewMovie = () => {
             try {
                 if (movieToEdit) {
                     // Send PUT request to update existing movie
-                    await axios.put(`http://localhost:3000/${movieToEdit.id}`, movieData);
+                    await axios.put(API_URL`${movieToEdit.id}`, movieData);
                 } else {
                     // Send POST request to add new movie
-                    await axios.post('http://localhost:3000', movieData);
+                    await axios.post(API_URL, movieData, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
                 }
 
                 setTimeout(() => navigate('/'), 100); // Small delay to ensure state update

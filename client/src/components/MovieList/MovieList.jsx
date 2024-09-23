@@ -4,14 +4,26 @@ import { FaRegEdit } from 'react-icons/fa';
 import { useMovies } from "../../context/MovieContext ";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
+
+const API_URL = "http://localhost:3000"
 
 const MovieList = () => {
-    const { movies, setMovies,fetchTodo } = useMovies();
+    const { movies, setMovies } = useMovies();
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchTodo()
     }, []);
+
+    const fetchTodo = async () => {
+        try {
+            const response = await axios(API_URL)
+            setMovies(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleDelete = (datas) => {
         console.log(datas); // Check the data being passed
