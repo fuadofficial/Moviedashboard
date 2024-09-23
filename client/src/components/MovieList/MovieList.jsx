@@ -18,18 +18,22 @@ const MovieList = () => {
 
     const fetchTodo = async () => {
         try {
-            const response = await axios(API_URL)
-            setMovies(response.data)
+            const response = await axios.get(`${API_URL}/`);
+            setMovies(response.data);
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleDelete = (datas) => {
-        console.log(datas); // Check the data being passed
-        const userConfirmed = window.confirm(`Are you sure you want to delete ${datas.name} from the movie list?`);
+    const handleDelete = async (movie) => {
+        const userConfirmed = window.confirm(`Are you sure you want to delete ${movie.name}?`);
         if (userConfirmed) {
-            setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== datas._id));
+            try {
+                await axios.delete(`${API_URL}/${movie._id}`);
+                setMovies((prevMovies) => prevMovies.filter((m) => m._id !== movie._id));
+            } catch (error) {
+                console.error('Error deleting movie', error);
+            }
         }
     };
 
@@ -41,7 +45,7 @@ const MovieList = () => {
         <div className="movielist-container">
             {movies && movies.length > 0 ? (
                 movies.map(movie => (
-                    <div className='movie-card' key={movie.id}>
+                    <div className='movie-card' key={movie._id}>
                         <img src={movie.image} alt={movie.name} className='movie-image' />
                         <div className='movie-details'>
                             <h3 className='movie-name'>{movie.name}</h3>
