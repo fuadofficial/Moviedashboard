@@ -29,7 +29,7 @@ const MovieList = () => {
         console.log(datas); // Check the data being passed
         const userConfirmed = window.confirm(`Are you sure you want to delete ${datas.name} from the movie list?`);
         if (userConfirmed) {
-            setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== datas.id));
+            setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== datas._id));
         }
     };
 

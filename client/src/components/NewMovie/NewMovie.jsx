@@ -66,7 +66,7 @@ const NewMovie = () => {
             try {
                 if (movieToEdit) {
                     // Send PUT request to update existing movie
-                    await axios.put(API_URL`${movieToEdit.id}`, movieData);
+                    await axios.put(`${API_URL}/${movieToEdit.id}`, movieData);
                 } else {
                     // Send POST request to add new movie
                     await axios.post(API_URL, movieData, {

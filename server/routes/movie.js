@@ -59,7 +59,7 @@ router.put('/', async (req, res) => {
         }
 
         res.status(400).json({
-            message: `item with id: ${id} does not exist for update`
+            message: `item with id: ${_id} does not exist for update`
         })
 
     } catch (error) {
@@ -98,7 +98,7 @@ router.delete('/', async (req, res) => {
             return res.status(200).json(allTodos);
         }
         res.status(404).json({
-            message: `Item : ${id} , doesn't exist for delete`,
+            message: `Item : ${_id} , doesn't exist for delete`,
         });
     } catch (error) {
         res.status(404).json({
