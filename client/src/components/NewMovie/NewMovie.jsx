@@ -3,14 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
 import { nanoid } from 'nanoid';
-// import { useMovies } from '../../context/MovieContext ';
 import axios from 'axios';
 
-const API_URL = "http://localhost:3000"
+const API_URL = "http://localhost:3000";
 
 const NewMovie = () => {
     const { genres } = useGenres();
-    // const { addMovie, updateMovie } = useMovies(); // Include updateMovie
     const navigate = useNavigate();
     const location = useLocation();
     const movieToEdit = location.state?.movie || null;
@@ -19,7 +17,7 @@ const NewMovie = () => {
     const [description, setDescription] = useState(movieToEdit ? movieToEdit.description : '');
     const [rating, setRating] = useState(movieToEdit ? movieToEdit.rating : 0);
     const [image, setImage] = useState(movieToEdit ? movieToEdit.image : null);
-    const [selectedGenres, setSelectedGenres] = useState(movieToEdit ? movieToEdit.special : []);
+    const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []);
     const [errors, setErrors] = useState({
         title: '',
         description: '',
@@ -44,7 +42,7 @@ const NewMovie = () => {
 
         if (rating <= 0) newErrors.rating = 'Please select a rating.';
         if (!image) newErrors.image = 'Please upload an image.';
-        if (selectedGenres.length < 1 || selectedGenres.length > 5) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
+        if (special.length < 1 || special.length > 5) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -56,9 +54,9 @@ const NewMovie = () => {
         if (validateForm()) {
             const movieData = {
                 id: movieToEdit ? movieToEdit.id : nanoid(),
-                name: title,
+                title,
                 description,
-                special: selectedGenres,
+                special,
                 image: typeof image === 'string' ? image : URL.createObjectURL(image),
                 rating,
             };
@@ -82,7 +80,7 @@ const NewMovie = () => {
                 setDescription('');
                 setRating(0);
                 setImage(null);
-                setSelectedGenres([]);
+                setSpecial([]);
             } catch (error) {
                 console.error('Error submitting movie data', error);
             }
@@ -98,7 +96,7 @@ const NewMovie = () => {
     };
 
     const handleCheckboxChange = (genre) => {
-        setSelectedGenres(prevSelectedGenres => {
+        setSpecial(prevSelectedGenres => {
             const newSelectedGenres = prevSelectedGenres.includes(genre)
                 ? prevSelectedGenres.filter(g => g !== genre)
                 : [...prevSelectedGenres, genre];
@@ -152,7 +150,7 @@ const NewMovie = () => {
                         type='text'
                         name='title'
                         placeholder='Type here'
-                        value={movie.title}
+                        value={title} // Fix here: use title state
                         onChange={handleChange(setTitle)}
                     />
                     {errors.title && <span className="error-message">{errors.title}</span>}
@@ -202,7 +200,7 @@ const NewMovie = () => {
                             <input
                                 type="checkbox"
                                 className='tick-box'
-                                checked={selectedGenres.includes(item)}
+                                checked={special.includes(item)}
                                 onChange={() => handleCheckboxChange(item)}
                             />
                         </div>

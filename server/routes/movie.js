@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { title, description, rating, image } = req.body;
+        const { title, description, rating, special, image } = req.body;
 
-        const movieItem = { title, description, rating, image };
+        const movieItem = { title, description, rating, special, image };
 
         await movies.create(movieItem);
         const allMovies = await movies.find()

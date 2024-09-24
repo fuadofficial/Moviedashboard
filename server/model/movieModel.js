@@ -20,6 +20,10 @@ const movieSchema = mongoose.Schema(
             max: 5,
             required: true
         },
+        special: {
+            type: [String],
+            required: true
+        },
         image: {
             type: Buffer,
             required: true
