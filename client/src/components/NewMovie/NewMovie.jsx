@@ -13,7 +13,7 @@ const NewMovie = () => {
     const location = useLocation();
     const movieToEdit = location.state?.movie || null;
 
-    const [title, setTitle] = useState(movieToEdit ? movieToEdit.name : '');
+    const [title, setTitle] = useState(movieToEdit ? movieToEdit.title : '');
     const [description, setDescription] = useState(movieToEdit ? movieToEdit.description : '');
     const [rating, setRating] = useState(movieToEdit ? movieToEdit.rating : 0);
     const [image, setImage] = useState(movieToEdit ? movieToEdit.image : null);
@@ -52,24 +52,27 @@ const NewMovie = () => {
         event.preventDefault();
 
         if (validateForm()) {
-            const movieData = {
-                id: movieToEdit ? movieToEdit.id : nanoid(),
-                title,
-                description,
-                special,
-                image: typeof image === 'string' ? image : URL.createObjectURL(image),
-                rating,
-            };
+            const formData = new FormData();
+            formData.append('id', movieToEdit ? movieToEdit.id : nanoid());
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('rating', rating);
+            formData.append('image', image); // Append the file directly
+            formData.append('special', JSON.stringify(special)); // Send as JSON string
 
             try {
                 if (movieToEdit) {
                     // Send PUT request to update existing movie
-                    await axios.put(`${API_URL}/${movieToEdit._id}`, movieData);
+                    await axios.put(`${API_URL}/${movieToEdit._id}`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    });
                 } else {
                     // Send POST request to add new movie
-                    await axios.post(API_URL, movieData, {
+                    await axios.post(API_URL, formData, {
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'multipart/form-data',
                         },
                     });
                 }
@@ -85,7 +88,8 @@ const NewMovie = () => {
                 console.error('Error submitting movie data', error);
             }
         }
-    }
+    };
+
 
     const handleChange = (setter) => (e) => {
         setter(e.target.value);

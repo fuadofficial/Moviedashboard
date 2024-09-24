@@ -11,7 +11,7 @@ const API_URL = "http://localhost:3000"
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
 
     useEffect(() => {
         fetchTodo()

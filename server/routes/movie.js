@@ -1,20 +1,37 @@
-const express = require('express')
-const router = express.Router()
-const movies = require('../model/movieModel')
+const express = require('express');
+const multer = require('multer');
+const router = express.Router();
+const Movie = require('../model/movieModel'); // Rename to "Movie" to avoid conflict with route variables
 
+// Configure multer to store image as a buffer in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// GET route to retrieve all movies
 router.get('/', async (req, res) => {
-    const movie = await movies.find().select('title description rating image ');
-    res.status(200).json(movie);
+    try {
+        // Rename the local variable to avoid confusion
+        const movieList = await Movie.find().select('title description rating special image');
+        const moviesWithImages = movieList.map((movie) => ({
+            ...movie.toObject(),
+            image: movie.image ? `data:image/jpeg;base64,${movie.image.toString('base64')}` : null,
+        }));
+        res.status(200).json(moviesWithImages);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
 
-router.post('/', async (req, res) => {
+// POST route to create a new movie
+router.post('/', upload.single('image'), async (req, res) => {
     try {
-        const { title, description, rating, special, image } = req.body;
+        const { title, description, rating, special } = req.body;
+        const image = req.file ? req.file.buffer : null;
 
-        const movieItem = { title, description, rating, special, image };
+        const movieItem = { title, description, rating, special: JSON.parse(special), image };
 
-        await movies.create(movieItem);
-        const allMovies = await movies.find()
+        await Movie.create(movieItem);
+        const allMovies = await Movie.find(); // Make sure to use "Movie" here
 
         res.status(200).json(allMovies);
 
@@ -25,13 +42,20 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+// PUT route to update a movie
+router.put('/:id', upload.single('image'), async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, rating, image } = req.body;
-        const updateData = await movies.findByIdAndUpdate(id, { title, description, rating, image }, { new: true });
+        const { title, description, rating, special } = req.body;
+        const image = req.file ? req.file.buffer : null;
+
+        const updateData = await Movie.findByIdAndUpdate(
+            id,
+            { title, description, rating, special: JSON.parse(special), ...(image && { image }) },
+            { new: true } 
+        );
         if (updateData) {
-            const allMovies = await movies.find();
+            const allMovies = await Movie.find(); 
             return res.status(200).json(allMovies);
         }
         res.status(400).json({ message: `Movie with id: ${id} does not exist` });
@@ -40,16 +64,16 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// DELETE route to remove a movie
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        await movies.findByIdAndDelete(id);
-        const allMovies = await movies.find();
+        await Movie.findByIdAndDelete(id); // Make sure to use "Movie" here
+        const allMovies = await Movie.find();
         res.status(200).json(allMovies);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
-
 
 module.exports = router;
