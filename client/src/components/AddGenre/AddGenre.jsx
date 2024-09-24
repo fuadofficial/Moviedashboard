@@ -14,7 +14,7 @@ const AddGenre = () => {
         if (inputRef.current) {
             inputRef.current.focus();
         }
-    }, [editIndex]); // Focus input after setting editIndex
+    }, [editIndex]);
 
     const handleAddOrUpdateGenre = () => {
         if (inputValue.trim() === "") return;
@@ -31,7 +31,8 @@ const AddGenre = () => {
             setGenres([...genres, inputValue]);
         }
 
-        setInputValue(""); // Clear input field
+        setInputValue(""); 
+        inputRef.current.focus();
     };
 
     const handleDeleteGenre = (index, value) => {

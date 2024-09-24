@@ -196,23 +196,25 @@ const NewMovie = () => {
                     {errors.rating && <span className="error-message">{errors.rating}</span>}
                 </div>
                 <div className="tick-box-container">
-                    <div className="button">
-                        <Link className='new-genre' to={'/genre'}>Add New Genre</Link>
-                    </div>
                     <div className="list">
-                        {genres.map((item, index) => (
-                            <div className="tick-box" key={index}>
-                                <label>{item}</label>
-                                <input
-                                    type="checkbox"
-                                    className='tick-box'
-                                    checked={special.includes(item)}
-                                    onChange={() => handleCheckboxChange(item)}
-                                />
+                        {Array.isArray(genres) && genres.length > 0 ? (
+                            genres.map((item, index) => (
+                                <div className="tick-box" key={index}>
+                                    <label>{item}</label>
+                                    <input
+                                        type="checkbox"
+                                        className='tick-box'
+                                        checked={special.includes(item)}
+                                        onChange={() => handleCheckboxChange(item)}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="button">
+                                <Link className='new-genre' to={'/genre'}>Add New Genre</Link>
                             </div>
-                        ))}
-                        {errors.checkboxes && <span className="error-message">{errors.checkboxes}</span>}
-
+                        )}
+                        {errors?.checkboxes && <span className="error-message">{errors.checkboxes}</span>}
                     </div>
                 </div>
                 <div className="button">
