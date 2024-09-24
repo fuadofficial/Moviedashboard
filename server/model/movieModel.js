@@ -4,13 +4,13 @@ const movieSchema = mongoose.Schema(
     {
         title: {
             type: String,
-            minLength: 2,
+            minLength: 1,
             maxLength: 20,
             required: true
         },
         description: {
             type: String,
-            minLength: 4,
+            minLength: 1,
             maxLength: 50,
             required: true
         },

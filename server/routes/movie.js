@@ -1,16 +1,13 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
-const Movie = require('../model/movieModel'); // Rename to "Movie" to avoid conflict with route variables
+const Movie = require('../model/movieModel');
 
-// Configure multer to store image as a buffer in memory
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// GET route to retrieve all movies
 router.get('/', async (req, res) => {
     try {
-        // Rename the local variable to avoid confusion
         const movieList = await Movie.find().select('title description rating special image');
         const moviesWithImages = movieList.map((movie) => ({
             ...movie.toObject(),
@@ -22,7 +19,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST route to create a new movie
 router.post('/', upload.single('image'), async (req, res) => {
     try {
         const { title, description, rating, special } = req.body;
@@ -31,7 +27,7 @@ router.post('/', upload.single('image'), async (req, res) => {
         const movieItem = { title, description, rating, special: JSON.parse(special), image };
 
         await Movie.create(movieItem);
-        const allMovies = await Movie.find(); // Make sure to use "Movie" here
+        const allMovies = await Movie.find(); 
 
         res.status(200).json(allMovies);
 
@@ -42,7 +38,6 @@ router.post('/', upload.single('image'), async (req, res) => {
     }
 });
 
-// PUT route to update a movie
 router.put('/:id', upload.single('image'), async (req, res) => {
     try {
         const { id } = req.params;
@@ -64,11 +59,10 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     }
 });
 
-// DELETE route to remove a movie
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        await Movie.findByIdAndDelete(id); // Make sure to use "Movie" here
+        await Movie.findByIdAndDelete(id); 
         const allMovies = await Movie.find();
         res.status(200).json(allMovies);
     } catch (error) {

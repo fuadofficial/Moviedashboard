@@ -11,7 +11,6 @@ app.use(express.json());
 
 connectDb()
 
-
 app.use('/', movieRouter)
 app.all('*', (req, res) => {
     res.status(404).json("This page is not found");

@@ -103,14 +103,16 @@
 .tick-box-container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
 }
 
-.tick-box-container .tick-box {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+
+.tick-box-container .new-genre{
+  color: var(--initial-color);
+  padding: 10px;
+  background-color: var(--select-color);
+  border-radius: 8px;
 }
+
 
 .tick-box-container .tick-box input {
   appearance: none;

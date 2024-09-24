@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
 import { nanoid } from 'nanoid';
@@ -57,19 +57,17 @@ const NewMovie = () => {
             formData.append('title', title);
             formData.append('description', description);
             formData.append('rating', rating);
-            formData.append('image', image); // Append the file directly
-            formData.append('special', JSON.stringify(special)); // Send as JSON string
+            formData.append('image', image);
+            formData.append('special', JSON.stringify(special));
 
             try {
                 if (movieToEdit) {
-                    // Send PUT request to update existing movie
                     await axios.put(`${API_URL}/${movieToEdit._id}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
                     });
                 } else {
-                    // Send POST request to add new movie
                     await axios.post(API_URL, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -198,18 +196,24 @@ const NewMovie = () => {
                     {errors.rating && <span className="error-message">{errors.rating}</span>}
                 </div>
                 <div className="tick-box-container">
-                    {genres.map((item, index) => (
-                        <div className="tick-box" key={index}>
-                            <label>{item}</label>
-                            <input
-                                type="checkbox"
-                                className='tick-box'
-                                checked={special.includes(item)}
-                                onChange={() => handleCheckboxChange(item)}
-                            />
-                        </div>
-                    ))}
-                    {errors.checkboxes && <span className="error-message">{errors.checkboxes}</span>}
+                    <div className="button">
+                        <Link className='new-genre' to={'/genre'}>Add New Genre</Link>
+                    </div>
+                    <div className="list">
+                        {genres.map((item, index) => (
+                            <div className="tick-box" key={index}>
+                                <label>{item}</label>
+                                <input
+                                    type="checkbox"
+                                    className='tick-box'
+                                    checked={special.includes(item)}
+                                    onChange={() => handleCheckboxChange(item)}
+                                />
+                            </div>
+                        ))}
+                        {errors.checkboxes && <span className="error-message">{errors.checkboxes}</span>}
+
+                    </div>
                 </div>
                 <div className="button">
                     <button type='submit'>
