@@ -100,18 +100,6 @@
   margin-top: 5px;
 }
 
-.tick-box-container .button {
-  margin: 15px 0;
-}
-
-.tick-box-container .new-genre {
-  text-decoration: none;
-  color: var(--initial-color);
-  padding: 10px;
-  background-color: var(--select-color);
-  border-radius: 8px;
-}
-
 .tick-box-container .list {
   display: flex;
   flex-wrap: wrap;
@@ -145,6 +133,19 @@
   font-size: 14px;
   color: white;
 }
+
+.tick-box-container .new-genre {
+  text-decoration: none;
+  color: var(--initial-color);
+  padding: 10px;
+  background-color: var(--select-color);
+  border-radius: 8px;
+}
+
+.tick-box-container .button {
+  margin: 15px 0;
+}
+
 
 .button button {
   padding: 8px;

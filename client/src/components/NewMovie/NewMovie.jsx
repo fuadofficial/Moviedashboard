@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
@@ -8,7 +8,7 @@ import axios from 'axios';
 const API_URL = "http://localhost:3000";
 
 const NewMovie = () => {
-    const { genres } = useGenres();
+    const { genres, fetchGenres } = useGenres(); // Fetch genres from context
     const navigate = useNavigate();
     const location = useLocation();
     const movieToEdit = location.state?.movie || null;
@@ -25,6 +25,10 @@ const NewMovie = () => {
         image: '',
         checkboxes: ''
     });
+
+    useEffect(() => {
+        fetchGenres(); // Ensure we have the latest genres
+    }, [fetchGenres]); // Dependency array ensures it's only called when needed
 
     const validateForm = () => {
         const newErrors = {};
@@ -87,7 +91,6 @@ const NewMovie = () => {
             }
         }
     };
-
 
     const handleChange = (setter) => (e) => {
         setter(e.target.value);
@@ -152,7 +155,7 @@ const NewMovie = () => {
                         type='text'
                         name='title'
                         placeholder='Type here'
-                        value={title} // Fix here: use title state
+                        value={title}
                         onChange={handleChange(setTitle)}
                     />
                     {errors.title && <span className="error-message">{errors.title}</span>}
@@ -200,12 +203,12 @@ const NewMovie = () => {
                         {Array.isArray(genres) && genres.length > 0 ? (
                             genres.map((item, index) => (
                                 <div className="tick-box" key={index}>
-                                    <label>{item}</label>
+                                    <label>{item.genre}</label> {/* Ensure the correct property name */}
                                     <input
                                         type="checkbox"
                                         className='tick-box'
-                                        checked={special.includes(item)}
-                                        onChange={() => handleCheckboxChange(item)}
+                                        checked={special.includes(item.genre)}
+                                        onChange={() => handleCheckboxChange(item.genre)}
                                     />
                                 </div>
                             ))
@@ -218,9 +221,7 @@ const NewMovie = () => {
                     </div>
                 </div>
                 <div className="button">
-                    <button type='submit'>
-                        {movieToEdit ? 'Update' : 'Submit'}
-                    </button>
+                    <button type="submit">Submit</button>
                 </div>
             </form>
         </div>
