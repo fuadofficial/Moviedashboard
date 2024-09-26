@@ -3,6 +3,9 @@ import { FaRegEdit } from 'react-icons/fa';
 import './AddGenre.css';
 import { useState, useRef, useEffect } from "react";
 import { useGenres } from "../../context/GenreContext";
+import axios from "axios";
+
+const API_URL = 'http://localhost:3000/genre'
 
 const AddGenre = () => {
     const [inputValue, setInputValue] = useState("");
@@ -14,33 +17,53 @@ const AddGenre = () => {
         if (inputRef.current) {
             inputRef.current.focus();
         }
-    }, [editIndex]);
+        fetchGenres();
+    }, []);
 
-    const handleAddOrUpdateGenre = () => {
+    const fetchGenres = async () => {
+        try {
+            const response = await axios.get(API_URL);
+            setGenres(response.data);
+        } catch (error) {
+            console.error('Error fetching genres:', error.message);
+        }
+    };
+
+    const handleAddOrUpdateGenre = async () => {
         if (inputValue.trim() === "") return;
 
-        if (editIndex !== null) {
-            // Update existing genre
-            const updatedGenres = genres.map((genre, index) =>
-                index === editIndex ? inputValue : genre
-            );
-            setGenres(updatedGenres);
-            setEditIndex(null); // Clear edit index after update
-        } else {
-            // Add new genre
-            setGenres([...genres, inputValue]);
+        try {
+            if (editIndex !== null) {
+                // Update genre
+                const genreId = genres[editIndex]._id;
+                await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
+                fetchGenres(); // Refresh the genres list
+                setEditIndex(null);
+            } else {
+                // Add new genre
+                await axios.post({API_URL}, { genre: inputValue });
+                fetchGenres(); // Refresh the genres list
+            }
+
+            setInputValue(""); // Clear input field
+        } catch (error) {
+            console.error('Error adding/updating genre:', error.message);
         }
 
-        setInputValue(""); 
         inputRef.current.focus();
     };
 
-    const handleDeleteGenre = (index, value) => {
+    const handleDeleteGenre = async (index, value) => {
         const userConfirmed = window.confirm(`Are you sure you want to delete ${value}?`);
         if (userConfirmed) {
-            const updatedGenres = genres.filter((_, id) => id !== index);
-            setGenres(updatedGenres);
-            if (editIndex === index) setEditIndex(null);
+            try {
+                const genreId = genres[index]._id;
+                await axios.delete(`${API_URL}/${genreId}`);
+                fetchGenres(); // Refresh the genres list
+                if (editIndex === index) setEditIndex(null);
+            } catch (error) {
+                console.error('Error deleting genre:', error.message);
+            }
         }
     };
 
