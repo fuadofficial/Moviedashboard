@@ -34,18 +34,16 @@ const AddGenre = () => {
 
         try {
             if (editIndex !== null) {
-                // Update genre
                 const genreId = genres[editIndex]._id;
                 await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
-                fetchGenres(); // Refresh the genres list
+                fetchGenres(); 
                 setEditIndex(null);
             } else {
-                // Add new genre
                 await axios.post({API_URL}, { genre: inputValue });
-                fetchGenres(); // Refresh the genres list
+                fetchGenres(); 
             }
 
-            setInputValue(""); // Clear input field
+            setInputValue(""); 
         } catch (error) {
             console.error('Error adding/updating genre:', error.message);
         }
