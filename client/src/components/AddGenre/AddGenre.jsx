@@ -57,7 +57,7 @@ const AddGenre = () => {
             try {
                 const genreId = genres[index]._id;
                 await axios.delete(`${API_URL}/${genreId}`);
-                fetchGenres(); // Refresh the genres list
+                fetchGenres(); 
                 if (editIndex === index) setEditIndex(null);
             } catch (error) {
                 console.error('Error deleting genre:', error.message);
