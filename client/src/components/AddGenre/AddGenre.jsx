@@ -7,7 +7,7 @@ import './AddGenre.css';
 const API_URL = 'http://localhost:3000/genre';
 
 const AddGenre = () => {
-    const { fetchGenres } = useGenres(); // Fetch the method to update genres in context
+    const { fetchGenres } = useGenres(); 
     const navigate = useNavigate();
 
     const [genre, setGenre] = useState('');
@@ -32,10 +32,10 @@ const AddGenre = () => {
 
         try {
             await axios.post(API_URL, { genre });
-            fetchGenres(); // Fetch the updated list of genres
-            setGenre(''); // Clear input field after adding
+            fetchGenres();
+            setGenre(''); 
             setError('');
-            navigate('/newmovie'); // Navigate back to the NewMovie component
+            navigate('/newmovie'); 
         } catch (error) {
             console.error('Error adding genre:', error.message);
             setError('Failed to add genre. Please try again.');
