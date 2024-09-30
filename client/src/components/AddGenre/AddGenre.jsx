@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AddGenre.css';
 
-<<<<<<< HEAD
 const API_URL = 'http://localhost:5000/genre'
-=======
-const API_URL = 'http://localhost:3000/genre';
->>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
 
 const AddGenre = () => {
     const { fetchGenres } = useGenres(); 
@@ -35,7 +31,6 @@ const AddGenre = () => {
         }
 
         try {
-<<<<<<< HEAD
             if (editIndex !== null) {
                 const genreId = genres[editIndex]._id;
                 await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
@@ -47,18 +42,10 @@ const AddGenre = () => {
             }
 
             setInputValue(""); 
-=======
-            await axios.post(API_URL, { genre });
-            fetchGenres();
-            setGenre(''); 
-            setError('');
-            navigate('/newmovie'); 
->>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
         } catch (error) {
             console.error('Error adding genre:', error.message);
             setError('Failed to add genre. Please try again.');
         }
-<<<<<<< HEAD
 
         inputRef.current.focus();
     };
@@ -123,26 +110,6 @@ const AddGenre = () => {
                     ))}
                 </div>
             </div>
-=======
-    };
-
-    return (
-        <div className="addgenre-container">
-            <form onSubmit={handleSubmit}>
-                <div className="genre-input">
-                    <label className='label-setup'>Add Genre</label>
-                    <input
-                        type="text"
-                        value={genre}
-                        onChange={handleChange}
-                        placeholder="Enter genre name"
-                        className='text-input'
-                    />
-                </div>
-                {error && <span className="error-message">{error}</span>}
-                <button type="submit" className="add-genre-btn">Add Genre</button>
-            </form>
->>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
         </div>
     );
 };

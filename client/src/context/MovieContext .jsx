@@ -1,29 +1,25 @@
 import { createContext, useState, useContext } from 'react';
 const MovieContext = createContext();
 
-// Create Provider Component
-// eslint-disable-next-line react/prop-types
 export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
 
-    const [editingMovie, setEditingMovie] = useState(null); // State for editing movie
+    const [editingMovie, setEditingMovie] = useState(null); 
 
-    // Add new movie
     const addMovie = (movie) => {
         setMovies((prevMovies) => [...prevMovies, movie]);
     };
 
-    // Update existing movie
+    
     const updateMovie = (updatedMovie) => {
         setMovies(prevMovies =>
             prevMovies.map(movie =>
                 movie.id === updatedMovie.id ? updatedMovie : movie
             )
         );
-        setEditingMovie(null); // Clear the editing movie state after update
+        setEditingMovie(null); 
     };
 
-    // Set movie to edit
     const startEditing = (movie) => {
         setEditingMovie(movie);
     };
@@ -35,5 +31,5 @@ export const MovieProvider = ({ children }) => {
     );
 };
 
-// Custom hook to use the Movie context
+
 export const useMovies = () => useContext(MovieContext);
