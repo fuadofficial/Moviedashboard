@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useGenres } from "../../context/GenreContext";
 import axios from "axios";
 
-const API_URL = 'http://localhost:3000/genre'
+const API_URL = 'http://localhost:5000/genre'
 
 const AddGenre = () => {
     const [inputValue, setInputValue] = useState("");
@@ -39,7 +39,7 @@ const AddGenre = () => {
                 fetchGenres(); 
                 setEditIndex(null);
             } else {
-                await axios.post({API_URL}, { genre: inputValue });
+                await axios.post(API_URL, { genre: inputValue });
                 fetchGenres(); 
             }
 
@@ -72,8 +72,9 @@ const AddGenre = () => {
     };
 
     const handleEditClick = (index) => {
-        setInputValue(genres[index]);
+        setInputValue(genres[index].genre);
         setEditIndex(index);
+        inputRef.current.focus();
     };
 
     return (
@@ -81,7 +82,7 @@ const AddGenre = () => {
             <div className="genre-cart">
                 <div className="input-section">
                     <div className="title">
-                        <p>{editIndex !== null ? 'Edit Title' : 'Add Title'}</p>
+                        <p>{editIndex !== null ? 'Edit Genre' : 'Add Genre'}</p>
                     </div>
                     <div className="form">
                         <input
@@ -93,18 +94,18 @@ const AddGenre = () => {
                             onKeyDown={handleKeyDown}
                         />
                         <button onClick={handleAddOrUpdateGenre}>
-                            {editIndex !== null ? 'Update' : 'Submit'}
+                            {editIndex !== null ? 'Update' : 'Add'}
                         </button>
                     </div>
                 </div>
                 <div className="genre-section">
                     {genres.map((value, index) => (
                         <div className="genre" key={index}>
-                            <p>{value}</p>
+                            <p>{value.genre}</p>
                             <hr />
                             <div className="icons">
                                 <FaRegEdit className="icon" onClick={() => handleEditClick(index)} />
-                                <MdDelete className="icon" onClick={() => handleDeleteGenre(index, value)} />
+                                <MdDelete className="icon" onClick={() => handleDeleteGenre(index, value.genre)} />
                             </div>
                         </div>
                     ))}

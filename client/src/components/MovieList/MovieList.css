@@ -6,6 +6,11 @@
   padding: 10px;
 }
 
+.movielist-container .loading{
+  color:var(--initial-color);
+  padding: 40px;
+}
+
 .addmovie-box {
   width: 80%;
   max-width: 600px;

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000"
+const API_URL = "http://localhost:5000"
 
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
@@ -47,7 +47,7 @@ const MovieList = () => {
     return (
         <div className="movielist-container">
             {loading ? (
-                <h1>Loading movies...</h1>
+                <h1 className="loading">Loading movies...</h1>
             ) :
                 movies && movies.length > 0 ? (
                     movies.map(movie => (
