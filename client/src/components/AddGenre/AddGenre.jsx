@@ -1,38 +1,41 @@
-import { MdDelete } from "react-icons/md";
-import { FaRegEdit } from 'react-icons/fa';
+import  { useState } from 'react';
+import { useGenres } from '../../context/GenreContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './AddGenre.css';
-import { useState, useRef, useEffect } from "react";
-import { useGenres } from "../../context/GenreContext";
-import axios from "axios";
 
+<<<<<<< HEAD
 const API_URL = 'http://localhost:5000/genre'
+=======
+const API_URL = 'http://localhost:3000/genre';
+>>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
 
 const AddGenre = () => {
-    const [inputValue, setInputValue] = useState("");
-    const { genres, setGenres } = useGenres()
-    const [editIndex, setEditIndex] = useState(null);
-    const inputRef = useRef(null);
+    const { fetchGenres } = useGenres(); 
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-        fetchGenres();
-    }, []);
+    const [genre, setGenre] = useState('');
+    const [error, setError] = useState('');
 
-    const fetchGenres = async () => {
-        try {
-            const response = await axios.get(API_URL);
-            setGenres(response.data);
-        } catch (error) {
-            console.error('Error fetching genres:', error.message);
+    const handleChange = (e) => {
+        setGenre(e.target.value);
+        if (e.target.value.trim() === '') {
+            setError('Genre cannot be empty.');
+        } else {
+            setError('');
         }
     };
 
-    const handleAddOrUpdateGenre = async () => {
-        if (inputValue.trim() === "") return;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (genre.trim() === '') {
+            setError('Genre cannot be empty.');
+            return;
+        }
 
         try {
+<<<<<<< HEAD
             if (editIndex !== null) {
                 const genreId = genres[editIndex]._id;
                 await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
@@ -44,9 +47,18 @@ const AddGenre = () => {
             }
 
             setInputValue(""); 
+=======
+            await axios.post(API_URL, { genre });
+            fetchGenres();
+            setGenre(''); 
+            setError('');
+            navigate('/newmovie'); 
+>>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
         } catch (error) {
-            console.error('Error adding/updating genre:', error.message);
+            console.error('Error adding genre:', error.message);
+            setError('Failed to add genre. Please try again.');
         }
+<<<<<<< HEAD
 
         inputRef.current.focus();
     };
@@ -111,6 +123,26 @@ const AddGenre = () => {
                     ))}
                 </div>
             </div>
+=======
+    };
+
+    return (
+        <div className="addgenre-container">
+            <form onSubmit={handleSubmit}>
+                <div className="genre-input">
+                    <label className='label-setup'>Add Genre</label>
+                    <input
+                        type="text"
+                        value={genre}
+                        onChange={handleChange}
+                        placeholder="Enter genre name"
+                        className='text-input'
+                    />
+                </div>
+                {error && <span className="error-message">{error}</span>}
+                <button type="submit" className="add-genre-btn">Add Genre</button>
+            </form>
+>>>>>>> 4399d640f5ab55e1123555949f73c7984495c93e
         </div>
     );
 };
