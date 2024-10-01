@@ -68,7 +68,7 @@ const NewMovie = () => {
       try {
         if (movieToEdit) {
           // PUT request for editing a movie
-          await axios.put(`${API_URL}//${movieToEdit._id}`, formData, {
+          await axios.put(`${API_URL}/${movieToEdit._id}`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
         } else {
@@ -103,13 +103,13 @@ const NewMovie = () => {
   };
 
   const handleCheckboxChange = (genre) => {
-    setSpecial((prevSelected) =>
-      prevSelected.includes(genre)
-        ? prevSelected.filter((g) => g !== genre)
-        : [...prevSelected, genre]
-    );
-
-    if (special.length < 1 || special.length > 5) {
+    const updatedSpecial = special.includes(genre)
+      ? special.filter((g) => g !== genre)
+      : [...special, genre];
+  
+    setSpecial(updatedSpecial);
+  
+    if (updatedSpecial.length < 1 || updatedSpecial.length > 5) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         checkboxes: 'Please select between 1 and 5 genres.',
@@ -121,6 +121,7 @@ const NewMovie = () => {
       }));
     }
   };
+  
 
   return (
     <div className='newmovie-container'>

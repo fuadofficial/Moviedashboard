@@ -8,19 +8,8 @@ const API_URL = 'http://localhost:5000/genre'
 
 const AddGenre = () => {
     const { fetchGenres } = useGenres(); 
-    const navigate = useNavigate();
 
     const [genre, setGenre] = useState('');
-    const [error, setError] = useState('');
-
-    const handleChange = (e) => {
-        setGenre(e.target.value);
-        if (e.target.value.trim() === '') {
-            setError('Genre cannot be empty.');
-        } else {
-            setError('');
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
