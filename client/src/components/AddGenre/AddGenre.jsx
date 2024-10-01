@@ -1,20 +1,26 @@
-import  { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useGenres } from '../../context/GenreContext';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaRegEdit } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 import './AddGenre.css';
 
-const API_URL = 'http://localhost:5000/genre'
+const API_URL = 'http://localhost:5000/genre';
 
 const AddGenre = () => {
-    const { fetchGenres } = useGenres(); 
+    const { genres, fetchGenres } = useGenres();  // Assuming genres are fetched from context
+    const [inputValue, setInputValue] = useState('');  // For input value state
+    const [editIndex, setEditIndex] = useState(null);  // For editing
+    const [error, setError] = useState(null);  // For error handling
+    const inputRef = useRef(null);  // For focusing the input
 
-    const [genre, setGenre] = useState('');
+    useEffect(() => {
+        fetchGenres(); // Fetch genres when the component mounts
+    }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (genre.trim() === '') {
+    const handleAddOrUpdateGenre = async () => {
+        if (inputValue.trim() === '') {
             setError('Genre cannot be empty.');
             return;
         }
@@ -23,20 +29,21 @@ const AddGenre = () => {
             if (editIndex !== null) {
                 const genreId = genres[editIndex]._id;
                 await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
-                fetchGenres(); 
-                setEditIndex(null);
+                fetchGenres(); // Refresh genre list after editing
+                setEditIndex(null);  // Clear edit index
             } else {
                 await axios.post(API_URL, { genre: inputValue });
-                fetchGenres(); 
+                fetchGenres(); // Refresh genre list after adding
             }
 
-            setInputValue(""); 
+            setInputValue("");  // Clear input field
+            setError(null);  // Clear any existing errors
         } catch (error) {
-            console.error('Error adding genre:', error.message);
-            setError('Failed to add genre. Please try again.');
+            console.error('Error adding/updating genre:', error.message);
+            setError('Failed to add/update genre. Please try again.');
         }
 
-        inputRef.current.focus();
+        inputRef.current.focus();  // Focus back on the input
     };
 
     const handleDeleteGenre = async (index, value) => {
@@ -45,8 +52,8 @@ const AddGenre = () => {
             try {
                 const genreId = genres[index]._id;
                 await axios.delete(`${API_URL}/${genreId}`);
-                fetchGenres(); 
-                if (editIndex === index) setEditIndex(null);
+                fetchGenres(); // Refresh genres after deletion
+                if (editIndex === index) setEditIndex(null);  // Reset edit index if the deleted genre was being edited
             } catch (error) {
                 console.error('Error deleting genre:', error.message);
             }
@@ -85,9 +92,10 @@ const AddGenre = () => {
                             {editIndex !== null ? 'Update' : 'Add'}
                         </button>
                     </div>
+                    {error && <p className="error-message">{error}</p>} {/* Display error message */}
                 </div>
                 <div className="genre-section">
-                    {genres.map((value, index) => (
+                    {genres && genres.map((value, index) => (
                         <div className="genre" key={index}>
                             <p>{value.genre}</p>
                             <hr />
