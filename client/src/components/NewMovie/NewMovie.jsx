@@ -124,10 +124,6 @@ const NewMovie = () => {
         }
     };
 
-    if (!genres || genres.length === 0) {
-        return <div>Loading genres...</div>; // Handle genres loading state
-    }
-
     return (
         <div className='newmovie-container'>
             <form onSubmit={handleSubmit}>
