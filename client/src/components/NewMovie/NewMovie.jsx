@@ -18,7 +18,7 @@ const NewMovie = () => {
     const [rating, setRating] = useState(movieToEdit ? movieToEdit.rating : 0);
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(movieToEdit ? movieToEdit.image : null);
-    const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special || [] : []);  // Default to empty array
+    const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []); 
     const [errors, setErrors] = useState({
         title: '',
         description: '',
@@ -29,7 +29,7 @@ const NewMovie = () => {
 
     useEffect(() => {
         if (movieToEdit && movieToEdit.image) {
-            setImagePreview(movieToEdit.image); // Set initial image preview if editing
+            setImagePreview(movieToEdit.image); 
         }
     }, [movieToEdit]);
 
@@ -46,7 +46,7 @@ const NewMovie = () => {
       
         if (!image && !imagePreview) newErrors.image = 'Please upload an image.';
         
-        if (special.length < 1 || special.length > 5) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
+        if (special.length < 1 || special.length >= 6) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;

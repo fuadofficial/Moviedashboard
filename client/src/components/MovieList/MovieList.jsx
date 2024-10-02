@@ -48,13 +48,13 @@ const MovieList = () => {
                     <div className='movie-card' key={movie._id}>
                         <img src={movie.image || '/default-image.jpg'} alt={movie.title} className="movie-image" />
                         <div className='movie-details'>
-                            <h3 className='movie-name'>{movie.title}</h3>
+                            <h3 className='movie-title'>{movie.title}</h3>
                             <p className='movie-description'>{movie.description}</p>
                             <div>
 
                                 <div className="movie-additional">
-                                    {movie.special.map((specialItem, index) => (
-                                        <div key={index} className="movie-special">{specialItem}</div>
+                                    {movie.special.map((item, index) => (
+                                        <div className="movie-special" key={index}>{item}</div>
                                     ))}
                                 </div>
 
