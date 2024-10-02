@@ -6,8 +6,15 @@
   padding: 10px;
 }
 
-.movielist-container .loading{
-  color:var(--initial-color);
+.movielist-container .loading-spinner {
+  width: 100%;
+  height: 300px;
+  color: var(--background-color);
+  font-size: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 40px;
 }
 
@@ -27,7 +34,8 @@
   text-shadow: 2px 2px black;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
-.movielist-container button{
+
+.movielist-container button {
   margin-top: 15px;
   background-color: var(--select-color);
   border: none;
@@ -43,7 +51,7 @@
 .movie-card {
   position: relative;
   display: flex;
-  width: 440px;
+  width: 393px;
   height: 270px;
   background-color: var(--movie-card);
   color: var(--initial-color);
@@ -96,16 +104,20 @@
 
 .movie-rating {
   font-size: 1.7em;
-  color: #f39c12; /* Star color */
+  color: #f39c12;
+  /* Star color */
   margin: 10px 0;
 }
 
 .cart-icons {
   display: flex;
   font-size: 20px;
-  position: absolute; /* Position the icons absolutely within the movie-card */
-  bottom: 10px; /* Distance from the bottom of the container */
-  right: 10px; /* Distance from the right edge of the container */
+  position: absolute;
+  /* Position the icons absolutely within the movie-card */
+  bottom: 10px;
+  /* Distance from the bottom of the container */
+  right: 10px;
+  /* Distance from the right edge of the container */
 }
 
 .cart-icon {
@@ -119,10 +131,12 @@
     width: 300px;
     height: 600px;
   }
+
   .movie-image {
     width: 100%;
     height: 300px;
   }
+
   .movielist-container .heading {
     font-size: 20px;
   }
