@@ -33,7 +33,6 @@ const NewMovie = () => {
         }
     }, [movieToEdit]);
 
-    // Validate form before submitting
     const validateForm = () => {
         const newErrors = {};
         if (!title.trim()) newErrors.title = 'Please enter a title.';
