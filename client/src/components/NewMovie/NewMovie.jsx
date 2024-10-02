@@ -51,7 +51,6 @@ const NewMovie = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -67,18 +66,14 @@ const NewMovie = () => {
             }
             try {
                 if (movieToEdit) {
-                    // PUT request for editing a movie
                     await axios.put(`${API_URL}/${movieToEdit._id}`, formData, {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     });
                 } else {
-                    // POST request for adding a new movie
                     await axios.post(API_URL, formData, {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     });
                 }
-
-                // Ensure navigate is only called after the request is successful
                 navigate('/');
             } catch (error) {
                 console.error('Error submitting movie data', error);

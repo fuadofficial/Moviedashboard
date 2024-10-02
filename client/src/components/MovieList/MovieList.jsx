@@ -50,14 +50,12 @@ const MovieList = () => {
                         <div className='movie-details'>
                             <h3 className='movie-title'>{movie.title}</h3>
                             <p className='movie-description'>{movie.description}</p>
-                            <div>
-
-                                <div className="movie-additional">
-                                    {movie.special.map((item, index) => (
-                                        <div className="movie-special" key={index}>{item}</div>
-                                    ))}
-                                </div>
-
+                            <div className="movie-additional">
+                                {movie.special.map((item, index) => (
+                                    <div className="movie-special" key={index}>
+                                        <p className="movie-item">{item}</p>
+                                    </div>
+                                ))}
                             </div>
 
                             <div className='movie-rating'>
