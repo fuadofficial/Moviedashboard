@@ -23,11 +23,10 @@ router.post('/', upload.single('image'), async (req, res) => {
     try {
         const { title, description, rating, special } = req.body;
         const image = req.file ? req.file.buffer : null;
-
-        const movieItem = { title, description, rating, special: JSON.parse(special), image };
+        const movieItem = { title, description, rating, special, image };
 
         await Movie.create(movieItem);
-        const allMovies = await Movie.find(); 
+        const allMovies = await Movie.find();
 
         res.status(200).json(allMovies);
 
@@ -46,11 +45,11 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 
         const updateData = await Movie.findByIdAndUpdate(
             id,
-            { title, description, rating, special: JSON.parse(special), ...(image && { image }) },
-            { new: true } 
+            { title, description, rating, special, ...(image && { image }) },
+            { new: true }
         );
         if (updateData) {
-            const allMovies = await Movie.find(); 
+            const allMovies = await Movie.find();
             return res.status(200).json(allMovies);
         }
         res.status(400).json({ message: `Movie with id: ${id} does not exist` });
@@ -62,7 +61,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        await Movie.findByIdAndDelete(id); 
+        await Movie.findByIdAndDelete(id);
         const allMovies = await Movie.find();
         res.status(200).json(allMovies);
     } catch (error) {

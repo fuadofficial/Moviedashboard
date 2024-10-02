@@ -5,7 +5,7 @@ const movieSchema = mongoose.Schema(
         title: {
             type: String,
             minLength: 1,
-            maxLength: 20,
+            maxLength: 25,
             required: true
         },
         description: {
@@ -16,6 +16,8 @@ const movieSchema = mongoose.Schema(
         },
         rating: {
             type: Number,
+            min: 1,
+            max: 5,
             required: true
         },
         special: {

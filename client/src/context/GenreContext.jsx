@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const GenreContext = createContext();
 
-const API_URL = 'http://localhost:3000/genre';
+const API_URL = 'http://localhost:5000/genre';
 
 // eslint-disable-next-line react/prop-types
 export const GenreProvider = ({ children }) => {
