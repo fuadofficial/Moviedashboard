@@ -37,13 +37,15 @@ const NewMovie = () => {
     const validateForm = () => {
         const newErrors = {};
         if (!title.trim()) newErrors.title = 'Please enter a title.';
-        if (title.length > 25) newErrors.title = 'Title cannot exceed 25 characters.';
+        if (title.length > 25) newErrors.title = 'Title cannot exceed 20 characters.';
 
         if (!description.trim()) newErrors.description = 'Please enter a description.';
-        if (description.length > 50) newErrors.description = 'Description cannot exceed 50 characters.';
+        if (description.length > 75) newErrors.description = 'Description cannot exceed 75 characters.';
 
         if (rating <= 0) newErrors.rating = 'Please select a rating between 1 and 5.';
+      
         if (!image && !imagePreview) newErrors.image = 'Please upload an image.';
+        
         if (special.length < 1 || special.length > 5) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
 
         setErrors(newErrors);

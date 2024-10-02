@@ -11,7 +11,7 @@ const API_URL = "http://localhost:5000"
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();    
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchTodo()
@@ -57,13 +57,13 @@ const MovieList = () => {
                                 <h3 className='movie-name'>{movie.title}</h3>
                                 <p className='movie-description'>{movie.description}</p>
                                 <div>
-                                    {movie.special && movie.special.length > 0 && (
-                                        <div className="movie-additional">
-                                            {movie.special.map((specialItem, index) => (
-                                                <div key={index} className="movie-special">{specialItem}</div>
-                                            ))}
-                                        </div>
-                                    )}
+
+                                    <div className="movie-additional">
+                                        {movie.special.map((specialItem, index) => (
+                                            <div key={index} className="movie-special">{specialItem}</div>
+                                        ))}
+                                    </div>
+
                                 </div>
 
                                 <div className='movie-rating'>
