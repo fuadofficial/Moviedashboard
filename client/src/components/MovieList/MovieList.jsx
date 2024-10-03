@@ -6,24 +6,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000"
+const API_URL = "http://localhost:5000";
 
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchTodo()
+        fetchMovies();
     }, []);
 
-    const fetchTodo = async () => {
+    const fetchMovies = async () => {
         try {
             const response = await axios.get(`${API_URL}/`);
             setMovies(response.data);
         } catch (error) {
             console.error("Error fetching movies", error);
         }
-    }
+    };
 
     const handleDelete = async (movie) => {
         const userConfirmed = window.confirm(`Are you sure you want to delete ${movie.title}?`);
@@ -38,47 +38,49 @@ const MovieList = () => {
     };
 
     const handleEdit = (movie) => {
-        navigate('/addmovie', { state: { movie } })
-    }
+        navigate('/addmovie', { state: { movie } });
+    };
 
     return (
         <div className="movielist-container">
             {movies && movies.length > 0 ? (
                 movies.map(movie => (
-                    <div className='movie-card' key={movie._id}>
-                        <img src={movie.image || '/default-image.jpg'} alt={movie.title} className="movie-image" />
-                        <div className='movie-details'>
-                            <h3 className='movie-title'>{movie.title}</h3>
-                            <p className='movie-description'>{movie.description}</p>
-                            <div className="movie-additional">
-                                {movie.special.map((item, index) => (
-                                    <div className="movie-special" key={index}>
-                                        <p className="movie-item">{item}</p>
-                                    </div>
-                                ))}
-                            </div>
+                    <div className="movie-card" key={movie._id}>
 
-                            <div className='movie-rating'>
+                        <img src={movie.image} alt={movie.title} className="movie-image" />
+
+                        <div className="movie-details">
+                            <h3 className="movie-title">{movie.title}</h3>
+
+                            <p className="movie-description">{movie.description}</p>
+
+                            {movie.special.map((item, index) => (
+                                <div className="movie-special">
+                                    <div className="movie-item" key={index}>{item}</div>
+                                </div>
+                            ))}
+
+                            <div className="movie-rating">
                                 {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
                             </div>
+
                             <div className="cart-icons">
-                                <FaRegEdit onClick={() => handleEdit(movie)} className=" cart-icon" />
+                                <FaRegEdit onClick={() => handleEdit(movie)} className="cart-icon" />
                                 <MdDelete onClick={() => handleDelete(movie)} className="cart-icon" />
                             </div>
                         </div>
                     </div>
                 ))
-            )
-                :
+            ) : (
                 <div className="addmovie-box">
                     <h1 className="heading">No movies available. Add a new movie to get started!</h1>
                     <Link to={'/addmovie'}>
                         <button>Add new movie</button>
                     </Link>
                 </div>
-            }
+            )}
         </div>
     );
 };
 
-export default MovieList;  
+export default MovieList;

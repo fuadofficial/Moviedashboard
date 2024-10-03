@@ -3,9 +3,7 @@ const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
-
-    const [editingMovie, setEditingMovie] = useState(null); 
-
+    
     const addMovie = (movie) => {
         setMovies((prevMovies) => [...prevMovies, movie]);
     };
@@ -17,15 +15,10 @@ export const MovieProvider = ({ children }) => {
                 movie.id === updatedMovie.id ? updatedMovie : movie
             )
         );
-        setEditingMovie(null); 
-    };
-
-    const startEditing = (movie) => {
-        setEditingMovie(movie);
     };
 
     return (
-        <MovieContext.Provider value={{ movies, addMovie, updateMovie, setMovies, editingMovie, startEditing }}>
+        <MovieContext.Provider value={{ movies, addMovie, updateMovie, setMovies }}>
             {children}
         </MovieContext.Provider>
     );

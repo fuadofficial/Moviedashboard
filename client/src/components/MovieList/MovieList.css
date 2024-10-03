@@ -77,11 +77,20 @@
   letter-spacing: 1px;
 }
 
+.movie-special {
+  margin: 15px 0px;
+}
+
+.movie-special .movie-item {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 30px;
+}
+
 
 .movie-rating {
   font-size: 1.7em;
   color: #f39c12;
-  /* Star color */
   margin: 10px 0;
 }
 

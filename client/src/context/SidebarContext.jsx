@@ -2,7 +2,6 @@ import { createContext, useState } from 'react';
 
 export const SidebarContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const SidebarProvider = ({ children }) => {
     const [isMinimized, setIsMinimized] = useState(true);
 
