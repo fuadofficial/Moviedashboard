@@ -2,7 +2,7 @@
   position: fixed;
   top: 80px;
   z-index: 1;
-  width: 230px;
+  width: 180px;
   height: 100vh;
   background-color: var(--background-color);
   color: var(--initial-color);
@@ -18,6 +18,11 @@
 
 .sidebar-container.minimized {
   width: 60px;
+  transition: all 400ms ease-in-out;
+}
+
+.sidebar-container.minimized:hover {
+  width: 64px;
 }
 
 .sidebar-container .minimize-bar {
@@ -35,6 +40,11 @@
   transform: rotate(0deg);
 }
 
+.sidebar-container .minimize-bar:hover .close-icon,
+.open-icon:hover {
+  color: var(--select-color);
+}
+
 .sidebar-container .links li {
   margin-top: 10px;
   position: relative;
@@ -49,7 +59,8 @@
   width: 100%;
   height: 100%;
   background-color: var(--select-color);
-  display: none; /* Hidden since hover is removed */
+  display: none;
+  /* Hidden since hover is removed */
   z-index: -1;
 }
 
@@ -69,7 +80,7 @@
   transition: color 400ms ease-in-out;
 }
 
-.sidebar-container .links li a:hover{
+.sidebar-container .links li a:hover {
   color: var(--select-color);
 }
 

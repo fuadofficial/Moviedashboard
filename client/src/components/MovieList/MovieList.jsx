@@ -8,6 +8,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000";
 
+
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
     
@@ -31,7 +32,7 @@ const MovieList = () => {
         if (userConfirmed) {
             try {
                 await axios.delete(`${API_URL}/${movie._id}`);
-                setMovies((prevMovies) => prevMovies.filter((m) => m._id !== movie._id));
+                setMovies((prevMovies) => prevMovies.filter((item) => item._id !== movie._id));
             } catch (error) {
                 console.error('Error deleting movie', error);
             }

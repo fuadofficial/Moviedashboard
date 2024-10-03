@@ -9,13 +9,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 4px 6px,  /* Small, subtle shadow at the bottom */
-  rgba(255, 255, 255, 0.06) 0px 12px 15px, /* Medium shadow extending further down */
-  rgba(255, 255, 255, 0.05) 0px 20px 25px; /* Larger shadow at the bottom */
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 4px 6px,
+    /* Small, subtle shadow at the bottom */
+    rgba(255, 255, 255, 0.06) 0px 12px 15px,
+    /* Medium shadow extending further down */
+    rgba(255, 255, 255, 0.05) 0px 20px 25px;
+  /* Larger shadow at the bottom */
 
 }
 
-.navbar-container button{
+.navbar-container button {
   color: var(--initial-color);
   background-color: var(--select-color);
   border-radius: 8px;
@@ -29,4 +32,19 @@
   color: var(--select-color);
   font-size: 50px;
   margin: 15px 0 0 20px;
+  transition: all 400ms ease-in-out;
+}
+
+.navbar-container .logo:hover{
+  font-size: 53px;
+}
+
+.add-new-movie {
+  color: var(--initial-color);
+  font-size: 30px;
+  margin: 5px;
+}
+
+.add-new-movie:hover{
+  color: var(--select-color);
 }

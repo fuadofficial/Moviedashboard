@@ -18,7 +18,7 @@ const SideBar = () => {
             <div className="sidebar-position">
 
                 <div className="minimize-bar" onClick={toggleSidebar}>
-                    {isMinimized ? <CiAlignLeft /> : <FaWindowClose className="close-icon" />}
+                    {isMinimized ? <CiAlignLeft className="open-icon" /> : <FaWindowClose className="close-icon" />}
                 </div>
                 <div className="links">
                     <ul>
