@@ -18,18 +18,13 @@ const NewMovie = () => {
     const [rating, setRating] = useState(movieToEdit ? movieToEdit.rating : 0);
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(movieToEdit ? movieToEdit.image : null);
-    const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []); 
-    const [errors, setErrors] = useState({
-        title: '',
-        description: '',
-        rating: '',
-        image: '',
-        checkboxes: ''
-    });
+    const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []);
+
+    const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });
 
     useEffect(() => {
         if (movieToEdit && movieToEdit.image) {
-            setImagePreview(movieToEdit.image); 
+            setImagePreview(movieToEdit.image);
         }
     }, [movieToEdit]);
 
@@ -42,9 +37,9 @@ const NewMovie = () => {
         if (description.length > 75) newErrors.description = 'Description cannot exceed 75 characters.';
 
         if (rating <= 0) newErrors.rating = 'Please select a rating between 1 and 5.';
-      
+
         if (!image && !imagePreview) newErrors.image = 'Please upload an image.';
-        
+
         if (special.length < 1 || special.length >= 6) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
 
         setErrors(newErrors);
@@ -61,9 +56,8 @@ const NewMovie = () => {
             formData.append('description', description);
             formData.append('rating', rating);
             formData.append('special', special);
-            if (image) {
-                formData.append('image', image);
-            }
+            if (image) { formData.append('image', image) }
+
             try {
                 if (movieToEdit) {
                     await axios.put(`${API_URL}/${movieToEdit._id}`, formData, {
@@ -81,16 +75,16 @@ const NewMovie = () => {
         }
     };
 
-    const handleInputChange = (setter) => (e) => {
-        setter(e.target.value);
+    const handleInputChange = (setter) => (event) => {
+        setter(event.target.value);
         setErrors((prevErrors) => ({
             ...prevErrors,
-            [e.target.name]: '',
+            [event.target.name]: '',
         }));
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
         if (file) {
             setImage(file);
             setImagePreview(URL.createObjectURL(file));
@@ -100,7 +94,7 @@ const NewMovie = () => {
 
     const handleCheckboxChange = (genre) => {
         const updatedSpecial = special.includes(genre)
-            ? special.filter((g) => g !== genre)
+            ? special.filter((allGenres) => allGenres !== genre)
             : [...special, genre];
 
         setSpecial(updatedSpecial);

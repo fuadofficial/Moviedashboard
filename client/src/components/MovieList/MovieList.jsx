@@ -10,6 +10,7 @@ const API_URL = "http://localhost:5000";
 
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -54,11 +55,13 @@ const MovieList = () => {
 
                             <p className="movie-description">{movie.description}</p>
 
-                            {movie.special.map((item, index) => (
-                                <div className="movie-special">
-                                    <div className="movie-item" key={index}>{item}</div>
-                                </div>
-                            ))}
+                            <div className="movie-special">
+                                {movie.special.map((item, index) => (
+                                    <div className="movie-items" key={index}>
+                                        <div className="movie-item">{item}</div>
+                                    </div>
+                                ))}
+                            </div>
 
                             <div className="movie-rating">
                                 {'★'.repeat(movie.rating)}{'☆'.repeat(5 - movie.rating)}
