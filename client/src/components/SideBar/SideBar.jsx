@@ -11,8 +11,6 @@ import { FaWindowClose } from "react-icons/fa";
 const SideBar = () => {
     const { isMinimized, toggleSidebar } = useContext(SidebarContext)
 
-    // side bar for move another page link use
-
     return (
         <div className={`sidebar-container ${isMinimized ? 'minimized' : ""}`}>
             <div className="sidebar-position">

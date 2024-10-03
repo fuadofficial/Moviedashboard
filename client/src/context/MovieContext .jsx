@@ -8,7 +8,6 @@ export const MovieProvider = ({ children }) => {
         setMovies((prevMovies) => [...prevMovies, movie]);
     };
 
-    
     const updateMovie = (updatedMovie) => {
         setMovies(prevMovies =>
             prevMovies.map(movie =>
