@@ -16,6 +16,7 @@ const AddGenre = () => {
 
     useEffect(() => {
         fetchGenres();
+        inputRef.current.focus();
     }, []);
 
     const handleAddOrUpdateGenre = async () => {
@@ -36,8 +37,8 @@ const AddGenre = () => {
             }
         } else {
             setError('Genre name cannot be empty');
-            inputRef.current.focus();
         }
+        inputRef.current.focus();
     };
 
     const handleDeleteGenre = async (index, value) => {
@@ -53,6 +54,7 @@ const AddGenre = () => {
                 setError('Something went wrong while deleting the genre.');
             }
         }
+        inputRef.current.focus();
     };
 
     const handleKeyDown = (event) => {

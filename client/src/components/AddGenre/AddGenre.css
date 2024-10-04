@@ -44,12 +44,17 @@
 
 .input-section .form button {
   width: 100px;
-  font-size: 18px;
+  font-size: 20px;
   padding: 10px;
   border-radius: 8px;
   background-color: var(--select-color);
   border: none;
   color: var(--initial-color);
+  transition: all 300ms ease-in-out;
+}
+
+.input-section .form button:hover {
+  background-color: rgb(49, 49, 238);
 }
 
 .genre-section {

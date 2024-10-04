@@ -19,7 +19,6 @@ const NewMovie = () => {
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(movieToEdit ? movieToEdit.image : null);
     const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []);
-
     const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });
 
     useEffect(() => {
@@ -32,14 +31,10 @@ const NewMovie = () => {
         const newErrors = {};
         if (!title.trim()) newErrors.title = 'Please enter a title.';
         if (title.length > 25) newErrors.title = 'Title cannot exceed 20 characters.';
-
         if (!description.trim()) newErrors.description = 'Please enter a description.';
         if (description.length > 75) newErrors.description = 'Description cannot exceed 75 characters.';
-
         if (rating <= 0) newErrors.rating = 'Please select a rating between 1 and 5.';
-
         if (!image && !imagePreview) newErrors.image = 'Please upload an image.';
-
         if (special.length < 1 || special.length >= 6) newErrors.checkboxes = 'Please select between 1 and 5 genres.';
 
         setErrors(newErrors);
@@ -188,24 +183,39 @@ const NewMovie = () => {
 
                 <div className='tick-box-container'>
                     <div className='list'>
-                        {genres && genres.length > 0 ? (
-                            genres.map((item, index) => (
-                                <div className='tick-box' key={index}>
-                                    <label>{item.genre}</label>
-                                    <input
-                                        type='checkbox'
-                                        checked={special.includes(item.genre)}
-                                        onChange={() => handleCheckboxChange(item.genre)}
-                                    />
+                        {movieToEdit
+                            ? (
+                                movieToEdit.special.map((item, index) => (
+                                    <div className='tick-box' key={index}>
+                                        <label>{item}</label>
+                                        <input
+                                            value={genres}
+                                            type='checkbox'
+                                            checked={special.includes(item)}
+                                            onChange={() => handleCheckboxChange(item)}
+                                        />
+                                    </div>
+                                ))
+                            )
+                            :
+                            genres && genres.length > 0 ? (
+                                genres.map((item, index) => (
+                                    <div className='tick-box' key={index}>
+                                        <label>{item.genre}</label>
+                                        <input
+                                            type='checkbox'
+                                            checked={special.includes(item.genre)}
+                                            onChange={() => handleCheckboxChange(item.genre)}
+                                        />
+                                    </div>
+                                ))
+                            ) : (
+                                <div className='button'>
+                                    <Link className='new-genre' to='/genre'>
+                                        Add New Genre
+                                    </Link>
                                 </div>
-                            ))
-                        ) : (
-                            <div className='button'>
-                                <Link className='new-genre' to='/genre'>
-                                    Add New Genre
-                                </Link>
-                            </div>
-                        )}
+                            )}
                         {errors.checkboxes && <span className='error-message'>{errors.checkboxes}</span>}
                     </div>
                 </div>
