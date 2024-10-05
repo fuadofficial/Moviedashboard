@@ -5,8 +5,7 @@ import { useMovies } from "../../context/MovieContext ";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../../constants/const";
 
 
 const MovieList = () => {
@@ -46,8 +45,8 @@ const MovieList = () => {
     return (
         <div className="movielist-container">
             {movies && movies.length > 0 ? (
-                movies.map(movie => (
-                    <div className="movie-card" key={movie._id}>
+                movies.map((movie,index) => (
+                    <div className="movie-card" key={index}>
 
                         <img src={movie.image} alt={movie.title} className="movie-image" />
 

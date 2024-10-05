@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from 'react';
 const MovieContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
     

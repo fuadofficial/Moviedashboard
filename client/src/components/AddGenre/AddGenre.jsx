@@ -4,8 +4,7 @@ import axios from 'axios';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import './AddGenre.css';
-
-const API_URL = 'http://localhost:5000/genre';
+import { GENRE_API_URL } from '../../constants/const';
 
 const AddGenre = () => {
     const { genres, fetchGenres } = useGenres();
@@ -24,10 +23,10 @@ const AddGenre = () => {
             try {
                 if (editIndex !== null) {
                     const genreId = genres[editIndex]._id;
-                    await axios.put(`${API_URL}/${genreId}`, { genre: inputValue });
+                    await axios.put(`${GENRE_API_URL}/${genreId}`, { genre: inputValue });
                     setEditIndex(null);
                 } else {
-                    await axios.post(API_URL, { genre: inputValue });
+                    await axios.post(GENRE_API_URL, { genre: inputValue });
                 }
                 setInputValue('');
                 fetchGenres();
@@ -46,7 +45,7 @@ const AddGenre = () => {
         if (userConfirmed) {
             try {
                 const genreId = genres[index]._id;
-                await axios.delete(`${API_URL}/${genreId}`);
+                await axios.delete(`${GENRE_API_URL}/${genreId}`);
                 fetchGenres();
                 if (editIndex === index) setEditIndex(null);
             } catch (error) {

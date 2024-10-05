@@ -1,12 +1,12 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { GENRE_API_URL } from '../constants/const';
 
 const GenreContext = createContext();
 
-const API_URL = 'http://localhost:5000/genre';
-
+// eslint-disable-next-line react/prop-types
 export const GenreProvider = ({ children }) => {
-    const [genres, setGenres] = useState([]);    
+    const [genres, setGenres] = useState([]);
 
     useEffect(() => {
         fetchGenres();
@@ -14,7 +14,7 @@ export const GenreProvider = ({ children }) => {
 
     const fetchGenres = async () => {
         try {
-            const response = await axios.get(API_URL);
+            const response = await axios.get(GENRE_API_URL);
             setGenres(response.data);
         } catch (error) {
             console.error('Error fetching genres:', error.message);

@@ -4,8 +4,7 @@ import './NewMovie.css';
 import { useGenres } from '../../context/GenreContext';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
-
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../../constants/const';
 
 const NewMovie = () => {
     const { genres } = useGenres();
@@ -183,39 +182,25 @@ const NewMovie = () => {
 
                 <div className='tick-box-container'>
                     <div className='list'>
-                        {movieToEdit
-                            ? (
-                                movieToEdit.special.map((item, index) => (
-                                    <div className='tick-box' key={index}>
-                                        <label>{item}</label>
-                                        <input
-                                            value={genres}
-                                            type='checkbox'
-                                            checked={special.includes(item)}
-                                            onChange={() => handleCheckboxChange(item)}
-                                        />
-                                    </div>
-                                ))
-                            )
-                            :
-                            genres && genres.length > 0 ? (
-                                genres.map((item, index) => (
-                                    <div className='tick-box' key={index}>
-                                        <label>{item.genre}</label>
-                                        <input
-                                            type='checkbox'
-                                            checked={special.includes(item.genre)}
-                                            onChange={() => handleCheckboxChange(item.genre)}
-                                        />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className='button'>
-                                    <Link className='new-genre' to='/genre'>
-                                        Add New Genre
-                                    </Link>
+                       
+                        {genres && genres.length > 0 ? (
+                            genres.map((item, index) => (
+                                <div className='tick-box' key={index}>
+                                    <label>{item.genre}</label>
+                                    <input
+                                        type='checkbox'
+                                        checked={special.includes(item)}
+                                        onChange={() => handleCheckboxChange(item.genre)}
+                                    />
                                 </div>
-                            )}
+                            ))
+                        ) : (
+                            <div className='button'>
+                                <Link className='new-genre' to='/genre'>
+                                    Add New Genre
+                                </Link>
+                            </div>
+                        )}
                         {errors.checkboxes && <span className='error-message'>{errors.checkboxes}</span>}
                     </div>
                 </div>
