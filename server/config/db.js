@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const connectDb = async () => {
     try {
-        const { connection } = await mongoose.connect(process.env.MONGO_URL);
-        console.log("Connected to MongoDB at: " + connection.host);
+        await mongoose.connect('mongodb://localhost:27017/movie');
+        console.log('MongoDB connected');
     } catch (error) {
-        console.log("Connection error:", error);
+        console.error('Connection error:', error);
+        process.exit(1);
     }
 };
 
 module.exports = connectDb;
-
