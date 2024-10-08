@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const genreSchema = mongoose.Schema(
     {
         genre: {
-            type: [String],
+            type:[String],
             minLength: 1,
             maxLength: 10,
+            trim: true,
             required: true
         }
     },

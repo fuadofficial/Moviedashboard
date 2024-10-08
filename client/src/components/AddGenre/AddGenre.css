@@ -3,6 +3,7 @@
   background-color: var(--background-color);
   border-radius: 8px;
   margin: 100px 10px 50px 70px;
+  max-width: 550px;
   width: 60%;
   color: var(--initial-color);
   padding: 30px;
@@ -85,13 +86,7 @@
 .genre .icons {
   margin-left: 70px;
 }
+
 .genre .icon {
   margin: 0 5px;
 }
-
-/* @media (min-width: 768px) {
-  .genre-container .genre-cart {
-    width: 90%;
-    max-width: 600px;
-  }
-} */

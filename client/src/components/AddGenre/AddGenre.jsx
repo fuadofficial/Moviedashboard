@@ -62,8 +62,8 @@ const AddGenre = () => {
         }
     };
 
-    const handleEditClick = (index) => {
-        setInputValue(genres[index].genre);
+    const handleEditClick = (index,genre) => {
+        setInputValue(genre);
         setEditIndex(index);
         inputRef.current.focus();
         setError(null);
@@ -100,7 +100,7 @@ const AddGenre = () => {
                             <p>{value.genre}</p>
                             <hr />
                             <div className="icons">
-                                <FaRegEdit className="icon" onClick={() => handleEditClick(index)} />
+                                <FaRegEdit className="icon" onClick={() => handleEditClick(index,value.genre)} />
                                 <MdDelete className="icon" onClick={() => handleDeleteGenre(index, value.genre)} />
                             </div>
                         </div>
