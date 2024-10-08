@@ -189,7 +189,7 @@ const NewMovie = () => {
                                     <label>{item.genre}</label>
                                     <input
                                         type='checkbox'
-                                        checked={special.includes(item)}
+                                        checked={special.includes(item.genre)}
                                         onChange={() => handleCheckboxChange(item.genre)}
                                     />
                                 </div>
