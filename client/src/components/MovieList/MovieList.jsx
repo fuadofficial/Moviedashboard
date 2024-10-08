@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants/const";
 
-
 const MovieList = () => {
     const { movies, setMovies } = useMovies();
     
@@ -45,8 +44,8 @@ const MovieList = () => {
     return (
         <div className="movielist-container">
             {movies && movies.length > 0 ? (
-                movies.map((movie,index) => (
-                    <div className="movie-card" key={index}>
+                movies.map((movie) => (
+                    <div className="movie-card" key={movie._id}>
 
                         <img src={movie.image} alt={movie.title} className="movie-image" />
 
@@ -56,8 +55,8 @@ const MovieList = () => {
                             <p className="movie-description">{movie.description}</p>
 
                             <div className="movie-special">
-                                {movie.special.map((item, index) => (
-                                    <div className="movie-items" key={index}>
+                                {movie.special?.map((item) => (
+                                    <div className="movie-items" key={item._id}>
                                         <div className="movie-item">{item}</div>
                                     </div>
                                 ))}

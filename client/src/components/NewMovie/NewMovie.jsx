@@ -18,7 +18,7 @@ const NewMovie = () => {
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(movieToEdit ? movieToEdit.image : null);
     const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []);
-    const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });
+    const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });    
 
     useEffect(() => {
         if (movieToEdit && movieToEdit.image) {
@@ -182,18 +182,19 @@ const NewMovie = () => {
 
                 <div className='tick-box-container'>
                     <div className='list'>
-                       
                         {genres && genres.length > 0 ? (
-                            genres.map((item, index) => (
-                                <div className='tick-box' key={index}>
-                                    <label>{item.genre}</label>
-                                    <input
-                                        type='checkbox'
-                                        checked={special.includes(item.genre)}
-                                        onChange={() => handleCheckboxChange(item.genre)}
-                                    />
-                                </div>
-                            ))
+                            genres.map((item, index) => {
+                                return (
+                                    <div className='tick-box' key={index}>
+                                        <label>{item.genre}</label>
+                                        <input
+                                            type='checkbox'
+                                            checked={special.includes(item.genre)}
+                                            onChange={() => handleCheckboxChange(item.genre)}
+                                        />
+                                    </div>
+                                );
+                            })
                         ) : (
                             <div className='button'>
                                 <Link className='new-genre' to='/genre'>
@@ -204,6 +205,7 @@ const NewMovie = () => {
                         {errors.checkboxes && <span className='error-message'>{errors.checkboxes}</span>}
                     </div>
                 </div>
+
 
                 <div className='button'>
                     <button type='submit'>{movieToEdit ? 'Update' : 'Submit'}</button>

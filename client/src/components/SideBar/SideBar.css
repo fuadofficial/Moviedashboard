@@ -77,7 +77,7 @@
   transition: opacity 0.3s ease-in-out;
   transition-delay: 0.2s;
   position: relative;
-  transition: color 400ms ease-in-out;
+  transition: color 800ms ease-in-out;
 }
 
 .sidebar-container .links li a:hover {

@@ -11,7 +11,7 @@ const AddGenre = () => {
     const [inputValue, setInputValue] = useState('');
     const [editIndex, setEditIndex] = useState(null);
     const [error, setError] = useState(null);
-    const inputRef = useRef(null);
+    const inputRef = useRef(null);    
 
     useEffect(() => {
         fetchGenres();
@@ -22,7 +22,7 @@ const AddGenre = () => {
         if (inputValue.trim() !== '') {
             try {
                 if (editIndex !== null) {
-                    const genreId = genres[editIndex]._id;
+                    const genreId = editIndex;
                     await axios.put(`${GENRE_API_URL}/${genreId}`, { genre: inputValue });
                     setEditIndex(null);
                 } else {
@@ -40,14 +40,14 @@ const AddGenre = () => {
         inputRef.current.focus();
     };
 
-    const handleDeleteGenre = async (index, value) => {
-        const userConfirmed = window.confirm(`Are you sure you want to delete ${value}?`);
+    const handleDeleteGenre = async (value) => {
+        const userConfirmed = window.confirm(`Are you sure you want to delete ${value.genre}?`);
         if (userConfirmed) {
             try {
-                const genreId = genres[index]._id;
+                const genreId = value._id;
                 await axios.delete(`${GENRE_API_URL}/${genreId}`);
                 fetchGenres();
-                if (editIndex === index) setEditIndex(null);
+                setEditIndex(null);
             } catch (error) {
                 console.error('Error deleting genre:', error.message);
                 setError('Something went wrong while deleting the genre.');
@@ -62,9 +62,9 @@ const AddGenre = () => {
         }
     };
 
-    const handleEditClick = (index,genre) => {
-        setInputValue(genre);
-        setEditIndex(index);
+    const handleEditClick = (value) => {
+        setInputValue(value.genre);
+        setEditIndex(value._id);
         inputRef.current.focus();
         setError(null);
     };
@@ -95,13 +95,13 @@ const AddGenre = () => {
                     {error && <p className="error-message">{error}</p>}
                 </div>
                 <div className="genre-section">
-                    {genres && genres.map((value, index) => (
-                        <div className="genre" key={index}>
+                    {genres && genres.map((value) => (
+                        <div className="genre" key={value._id}>
                             <p>{value.genre}</p>
                             <hr />
                             <div className="icons">
-                                <FaRegEdit className="icon" onClick={() => handleEditClick(index,value.genre)} />
-                                <MdDelete className="icon" onClick={() => handleDeleteGenre(index, value.genre)} />
+                                <FaRegEdit className="icon" onClick={() => handleEditClick(value)} />
+                                <MdDelete className="icon" onClick={() => handleDeleteGenre(value)} />
                             </div>
                         </div>
                     ))}
