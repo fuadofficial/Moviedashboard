@@ -8,7 +8,7 @@ import axios from "axios";
 import { API_URL } from "../../constants/const";
 
 const MovieList = () => {
-    const { movies, setMovies } = useMovies();
+    const { movies, setMovies } = useMovies();    
     
     const navigate = useNavigate();
 
@@ -55,8 +55,8 @@ const MovieList = () => {
                             <p className="movie-description">{movie.description}</p>
 
                             <div className="movie-special">
-                                {movie.special?.map((item) => (
-                                    <div className="movie-items" key={item._id}>
+                                {movie.special.map((item,index) => (
+                                    <div className="movie-items" key={index}>
                                         <div className="movie-item">{item}</div>
                                     </div>
                                 ))}

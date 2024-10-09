@@ -18,7 +18,9 @@ const NewMovie = () => {
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(movieToEdit ? movieToEdit.image : null);
     const [special, setSpecial] = useState(movieToEdit ? movieToEdit.special : []);
-    const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });    
+    const [errors, setErrors] = useState({ title: '', description: '', rating: '', image: '', checkboxes: '' });
+
+    console.log(special);
 
     useEffect(() => {
         if (movieToEdit && movieToEdit.image) {
