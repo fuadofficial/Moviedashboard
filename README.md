@@ -1,4 +1,4 @@
-#Working Video: (URL:https://github.com/thafsi-pv/MovieDashboard/assets/22377348/35278937-7a2d-47a9-9a26-9ecda3ed4506)
+
 
 This is a web app built using React, Node/Express.js, MongoDB, and Cloudinary CDN. It allows users to add, edit, and view movie data. Movie data includes movie title, rating, star category, genre, and movie poster image. A separate page allows users to add and manage movie genres.
 
