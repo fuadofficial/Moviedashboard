@@ -5,7 +5,7 @@ import { GENRE_API_URL } from '../constants/const';
 const GenreContext = createContext();
 
 export const GenreProvider = ({ children }) => {
-    const [genres, setGenres] = useState([{}]);
+    const [genres, setGenres] = useState([]);
 
     useEffect(() => {
         fetchGenres();

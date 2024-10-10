@@ -8,8 +8,7 @@ import axios from "axios";
 import { API_URL } from "../../constants/const";
 
 const MovieList = () => {
-    const { movies, setMovies } = useMovies();    
-    
+    const { movies, setMovies } = useMovies(); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const MovieList = () => {
     const fetchMovies = async () => {
         try {
             const response = await axios.get(`${API_URL}/`);
-            setMovies(response.data);
+            setMovies(response.data); 
         } catch (error) {
             console.error("Error fetching movies", error);
         }
@@ -44,21 +43,17 @@ const MovieList = () => {
     return (
         <div className="movielist-container">
             {movies && movies.length > 0 ? (
-                movies.map((movie) => (
-                    <div className="movie-card" key={movie._id}>
-
+                movies.map((movie) => ( 
+                    <div className="movie-card" key={movie._id}>  
                         <img src={movie.image} alt={movie.title} className="movie-image" />
 
                         <div className="movie-details">
                             <h3 className="movie-title">{movie.title}</h3>
-
                             <p className="movie-description">{movie.description}</p>
 
                             <div className="movie-special">
-                                {movie.special.map((item,index) => (
-                                    <div className="movie-items" key={index}>
-                                        <div className="movie-item">{item}</div>
-                                    </div>
+                                {movie.special.map((item, index) => (
+                                    <div className="movie-items" key={index}>{item}</div>
                                 ))}
                             </div>
 
