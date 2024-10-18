@@ -22,7 +22,11 @@ router.get('/', async (req, res) => {
 router.post('/', upload.single('image'), async (req, res) => {
     try {
         const { title, description, rating, special } = req.body;
-        const image = req.file ? req.file.buffer : null;
+
+        req.file ?
+            image = { url: req.file.path, publicId: req.file.filename }
+            : image = null;
+
         const movieItem = { title, description, rating, special, image };
 
         await Movie.create(movieItem);
